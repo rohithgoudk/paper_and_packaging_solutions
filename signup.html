@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Partner Account — Pulp &amp; Press</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:        #1C1712;
+  --ink-soft:   #2A2119;
+  --ink-70:     rgba(28,23,18,.68);
+  --ink-45:     rgba(28,23,18,.45);
+  --ink-25:     rgba(28,23,18,.16);
+  --paper:      #F6F1E7;
+  --paper-dim:  #EDE3CE;
+  --white:      #FFFFFF;
+  --kraft:      #B9895A;
+  --kraft-deep: #8C6239;
+  --kraft-light:#E8D2AC;
+  --forest:     #45573A;
+  --stamp:      #A63A2E;
+  --stamp-pale: #F5E2DC;
+  --danger:     #A63A2E;
+  --danger-pale:#F5E2DC;
+  --line:       rgba(28,23,18,.14);
+  --line-soft:  rgba(28,23,18,.08);
+  --radius-xl:26px;
+  --radius-lg:18px;
+  --radius-md:14px;
+  --radius-sm:10px;
+  --radius-pill:999px;
+  --shadow-sm:0 6px 18px -8px rgba(28,23,18,.16);
+  --shadow-md:0 18px 40px -14px rgba(28,23,18,.22);
+  --shadow-lg:0 40px 80px -24px rgba(28,23,18,.3);
+  --shadow-stamp:0 16px 34px -12px rgba(166,58,46,.35);
+  --display:'Anton','Arial Narrow',sans-serif;
+  --mono:'Space Mono',monospace;
+  --body:'Inter',sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --dur-fast:.22s;
+  --dur:.4s;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; }
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  position:relative;
+  overflow-x:hidden;
+}
+a{ color:inherit; text-decoration:none; }
+button{ font-family:inherit; cursor:pointer; background:none; border:none; color:inherit; }
+input{ font-family:inherit; color:inherit; }
+::selection{ background:var(--stamp); color:var(--paper); }
+:focus-visible{ outline:2px solid var(--stamp); outline-offset:3px; border-radius:4px; }
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+  }
+}
+
+/* corrugated flute texture, ambient */
+body::before{
+  content:"";
+  position:fixed; inset:0;
+  background-image:repeating-linear-gradient(180deg, rgba(28,23,18,.035) 0px, rgba(28,23,18,.035) 1px, transparent 1px, transparent 9px);
+  z-index:0;
+  pointer-events:none;
+}
+body::after{
+  content:"";
+  position:fixed; inset:0;
+  background:radial-gradient(55% 42% at 50% 0%, var(--kraft-light) 0%, transparent 72%);
+  opacity:.55;
+  z-index:0;
+  pointer-events:none;
+}
+
+/* ===== top nav buttons ===== */
+.top-nav-btns{
+  position:fixed; top:28px; left:28px; z-index:20;
+  display:flex; align-items:center; gap:10px;
+}
+.nav-pill-btn{
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--white);
+  border:1px solid var(--line);
+  color:var(--ink-70);
+  font-family:var(--mono);
+  font-size:12.5px; font-weight:700; letter-spacing:.03em; text-transform:uppercase;
+  padding:10px 20px 10px 14px;
+  border-radius:var(--radius-pill);
+  box-shadow:var(--shadow-sm);
+  transition:color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+}
+.nav-pill-btn:hover{ color:var(--stamp); border-color:var(--stamp); transform:translateY(-2px); box-shadow:var(--shadow-md); }
+.nav-pill-btn svg{ flex-shrink:0; }
+
+@media (max-width:1023px){
+  .top-nav-btns{ top:16px; left:16px; }
+  .nav-pill-btn{ font-size:11px; padding:7px 14px 7px 10px; }
+  .nav-pill-btn svg{ width:15px; height:15px; }
+}
+
+/* ===== root layout ===== */
+.auth-root{
+  position:relative; z-index:1;
+  width:100%; max-width:1160px;
+  display:flex; align-items:center; justify-content:center; gap:56px;
+}
+@media (max-width:1023px){ .auth-root{ padding-top:44px; flex-direction:column-reverse; } }
+
+/* ===== card ===== */
+.auth-card{ width:100%; max-width:460px; flex-shrink:0; margin:56px 0 24px; opacity:0; transform:translateY(18px); animation:cardIn .7s var(--ease) .05s forwards; }
+@keyframes cardIn{ to{ opacity:1; transform:translateY(0); } }
+
+.auth-card-inner{
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:var(--radius-xl);
+  padding:44px 38px 34px;
+  box-shadow:var(--shadow-lg);
+  position:relative;
+  overflow:hidden;
+}
+@media (max-width:480px){ .auth-card-inner{ padding:28px 20px 24px; border-radius:var(--radius-lg); } }
+
+.auth-decoration-mobile{
+  display:flex; align-items:center; gap:10px; justify-content:center;
+  margin-bottom:24px; padding:12px 18px;
+  background:var(--ink); color:var(--paper);
+  border-radius:var(--radius-md);
+  font-family:var(--mono); font-size:11px; letter-spacing:.03em;
+}
+.auth-decoration-mobile strong{ color:var(--kraft-light); font-family:var(--display); font-size:14px; letter-spacing:.01em; margin-right:4px; }
+@media (min-width:1024px){ .auth-decoration-mobile{ display:none; } }
+
+.auth-logo{ display:flex; align-items:center; gap:10px; margin-bottom:22px; }
+.auth-logo svg{ width:28px; height:28px; }
+.auth-logo span{ font-family:var(--display); font-size:18px; letter-spacing:.01em; text-transform:uppercase; }
+.auth-logo span em{ font-style:normal; color:var(--stamp); }
+
+.signup-header{ text-align:left; margin-bottom:26px; }
+.badge-pill{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:7px 16px;
+  border:1px solid var(--line);
+  border-radius:var(--radius-pill);
+  font-family:var(--mono);
+  font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--stamp);
+  background:var(--stamp-pale);
+  margin-bottom:18px;
+}
+.badge-pill::before{ content:""; width:6px; height:6px; border-radius:50%; background:var(--stamp); flex-shrink:0; }
+
+.signup-title{
+  font-family:var(--display);
+  text-transform:uppercase;
+  font-size:clamp(26px, 4vw, 32px);
+  line-height:1.05;
+  letter-spacing:.005em;
+  margin:0 0 8px;
+  color:var(--ink);
+}
+.signup-title em{ font-style:normal; color:var(--stamp); }
+.signup-subtitle{ font-size:14px; color:var(--ink-70); margin:0; }
+
+/* ===== form ===== */
+.signup-form-group{
+  margin-bottom:16px;
+  opacity:0; transform:translateY(10px);
+  animation:fieldIn .55s var(--ease) forwards;
+}
+@keyframes fieldIn{ to{ opacity:1; transform:translateY(0); } }
+.signup-form-group:nth-of-type(1){ animation-delay:.12s; }
+.signup-form-group:nth-of-type(2){ animation-delay:.17s; }
+.signup-form-group:nth-of-type(3){ animation-delay:.22s; }
+.signup-form-group:nth-of-type(4){ animation-delay:.27s; }
+.signup-form-group:nth-of-type(5){ animation-delay:.32s; }
+
+.signup-form-group label{
+  display:block;
+  font-family:var(--mono);
+  font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--ink-70);
+  margin-bottom:8px;
+}
+
+.signup-input-wrap{
+  display:flex; align-items:center;
+  background:var(--paper);
+  border:1.5px solid var(--line);
+  border-radius:var(--radius-sm);
+  transition:border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+}
+.signup-input-wrap:focus-within{
+  border-color:var(--stamp);
+  background:var(--white);
+  box-shadow:0 0 0 4px var(--stamp-pale);
+}
+.signup-input-wrap--error{ border-color:var(--danger); }
+.signup-input-wrap--error:focus-within{ box-shadow:0 0 0 4px var(--danger-pale); }
+.signup-input-wrap.shake{ animation:shake .45s var(--ease); }
+@keyframes shake{
+  10%,90%{ transform:translateX(-1px); }
+  20%,80%{ transform:translateX(3px); }
+  30%,50%,70%{ transform:translateX(-6px); }
+  40%,60%{ transform:translateX(6px); }
+}
+
+.field-icon{ width:17px; height:17px; margin-left:13px; color:var(--ink-45); flex-shrink:0; transition:color var(--dur-fast) var(--ease); }
+.signup-input-wrap:focus-within .field-icon{ color:var(--stamp); }
+
+.signup-input{
+  flex:1; min-width:0;
+  background:transparent; border:none; outline:none;
+  color:var(--ink); font-size:14.5px;
+  padding:13px 14px 13px 10px;
+}
+.signup-input::placeholder{ color:var(--ink-45); }
+
+.signup-input[type="password"]::-ms-reveal,
+.signup-input[type="password"]::-ms-clear{ display:none; width:0; height:0; pointer-events:none; }
+.signup-input::-webkit-credentials-auto-fill-button,
+.signup-input::-webkit-strong-password-auto-fill-button{ display:none !important; }
+
+.signup-password-toggle{
+  display:flex; align-items:center; justify-content:center;
+  width:40px; height:40px; flex-shrink:0; margin-right:4px;
+  color:var(--ink-45);
+  transition:color var(--dur-fast) var(--ease);
+  border-radius:8px;
+}
+.signup-password-toggle:hover{ color:var(--stamp); }
+.signup-password-toggle svg{ width:17px; height:17px; }
+
+.signup-error{
+  display:block;
+  font-family:var(--mono);
+  font-size:11px; font-weight:700;
+  color:var(--danger);
+  margin-top:6px;
+  opacity:0; transform:translateY(-4px);
+  transition:opacity .25s var(--ease), transform .25s var(--ease);
+}
+.signup-error.show{ opacity:1; transform:translateY(0); }
+.signup-hint{ display:block; font-size:11.5px; color:var(--ink-45); margin-top:6px; }
+.signup-form-group.has-error .signup-hint{ display:none; }
+
+/* ===== terms ===== */
+.signup-terms{
+  margin:18px 0 22px;
+  opacity:0; transform:translateY(10px);
+  animation:fieldIn .55s var(--ease) .36s forwards;
+}
+.signup-checkbox{ display:flex; align-items:flex-start; gap:10px; font-size:12.5px; font-weight:500; color:var(--ink-70); cursor:pointer; line-height:1.55; }
+.signup-checkbox input{ position:absolute; opacity:0; width:0; height:0; }
+.signup-checkbox-custom{
+  width:18px; height:18px; margin-top:1px; border-radius:5px;
+  border:1.5px solid var(--ink-25); background:var(--paper); position:relative; flex-shrink:0;
+  transition:background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+}
+.signup-checkbox-custom svg{ width:11px; height:11px; position:absolute; left:2.5px; top:2.5px; opacity:0; transform:scale(.5); color:var(--white); transition:opacity .2s var(--ease), transform .2s var(--ease); }
+.signup-checkbox input:checked + .signup-checkbox-custom{ background:var(--stamp); border-color:var(--stamp); }
+.signup-checkbox input:checked + .signup-checkbox-custom svg{ opacity:1; transform:scale(1); }
+.signup-terms-link{ color:var(--stamp); font-weight:700; text-decoration:underline; text-underline-offset:3px; }
+.signup-terms-link:hover{ color:var(--ink); }
+.signup-error--terms{ margin-top:8px; margin-left:28px; }
+
+/* ===== submit — reuses theme roll-btn ===== */
+.roll-btn{
+  position:relative; width:100%;
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  padding:16px;
+  border-radius:var(--radius-pill);
+  font-family:var(--mono);
+  font-size:13.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase;
+  overflow:hidden; isolation:isolate;
+  transition:transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease), opacity var(--dur-fast) var(--ease);
+  background:var(--stamp); color:var(--paper);
+  opacity:0; transform:translateY(10px);
+  animation:fieldIn .55s var(--ease) .42s forwards;
+}
+.roll-btn::before{
+  content:""; position:absolute; inset:0;
+  background:var(--ink);
+  transform:translateY(102%);
+  transition:transform var(--dur) var(--ease);
+  z-index:0;
+}
+.roll-btn:hover::before{ transform:translateY(0); }
+.roll-btn:hover{ transform:translateY(-2px); box-shadow:var(--shadow-stamp); }
+.roll-btn:active{ transform:translateY(0) scale(.98); }
+.roll-btn span{ position:relative; z-index:1; }
+.roll-btn:disabled, .roll-btn.loading{ opacity:.85; cursor:not-allowed; transform:none; }
+.signup-btn-arrow{ transition:transform var(--dur-fast) var(--ease); display:inline-flex; }
+.roll-btn:hover .signup-btn-arrow{ transform:translate(3px,-3px); }
+
+.signup-spinner{
+  width:15px; height:15px; border-radius:50%;
+  border:2px solid rgba(246,241,231,.35); border-top-color:var(--paper);
+  animation:spin .7s linear infinite;
+  display:inline-block; vertical-align:-2px;
+}
+@keyframes spin{ to{ transform:rotate(360deg); } }
+
+/* ===== divider ===== */
+.signup-divider{
+  display:flex; align-items:center; gap:14px; margin:26px 0 20px;
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-45);
+  opacity:0; animation:fieldIn .5s var(--ease) .48s forwards;
+}
+.signup-divider::before, .signup-divider::after{ content:""; flex:1; height:1px; background:var(--line); }
+
+/* ===== social ===== */
+.signup-social{
+  display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; margin-bottom:24px;
+  opacity:0; animation:fieldIn .5s var(--ease) .54s forwards;
+}
+.signup-social-btn{
+  display:flex; align-items:center; justify-content:center; gap:7px;
+  background:var(--paper); border:1px solid var(--line); color:var(--ink-70);
+  font-family:var(--mono); font-size:11.5px; font-weight:700; letter-spacing:.02em;
+  padding:11px 6px; border-radius:var(--radius-md);
+  transition:border-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+}
+.signup-social-btn:hover{ border-color:var(--stamp); color:var(--stamp); background:var(--stamp-pale); transform:translateY(-2px); }
+@media (max-width:420px){ .signup-social{ grid-template-columns:1fr; } }
+
+/* ===== login link ===== */
+.signup-login{ text-align:center; opacity:0; animation:fieldIn .5s var(--ease) .6s forwards; }
+.signup-login p{ font-size:13.5px; color:var(--ink-70); margin:0; }
+.signup-login-link{ color:var(--stamp); font-weight:700; text-decoration:underline; text-underline-offset:3px; }
+.signup-login-link:hover{ color:var(--ink); }
+
+.auth-badge-status{
+  display:flex; align-items:center; gap:8px; justify-content:center;
+  margin-top:22px;
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.03em; text-transform:uppercase;
+  color:var(--ink-45); font-weight:600;
+  opacity:0; animation:fieldIn .5s var(--ease) .66s forwards;
+}
+.auth-badge-status::before{ content:""; width:7px; height:7px; border-radius:50%; background:var(--forest); flex-shrink:0; box-shadow:0 0 0 3px rgba(69,87,58,.15); }
+
+/* ===== decorative side panel ===== */
+.auth-decoration{ display:none; }
+@media (min-width:1024px){
+  .auth-decoration{ display:flex; flex:1; max-width:460px; }
+  .auth-decoration-inner{
+    background:var(--ink);
+    border-radius:var(--radius-xl);
+    padding:52px 40px;
+    width:100%;
+    display:flex; flex-direction:column; justify-content:center;
+    position:relative; overflow:hidden;
+    box-shadow:var(--shadow-lg);
+    min-height:660px;
+  }
+  .auth-decoration-inner::before{
+    content:"";
+    position:absolute; inset:0;
+    background:radial-gradient(65% 60% at 50% 100%, rgba(185,137,90,.32), transparent 70%);
+  }
+  .auth-decoration-inner::after{
+    content:"";
+    position:absolute; inset:0;
+    background-image:repeating-linear-gradient(180deg, rgba(246,241,231,.045) 0px, rgba(246,241,231,.045) 1px, transparent 1px, transparent 10px);
+  }
+  .auth-decoration-inner > *{ position:relative; z-index:1; }
+
+  .auth-decoration-eyebrow{
+    font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--kraft-light); margin-bottom:16px; display:flex; align-items:center; gap:8px;
+  }
+  .auth-decoration-eyebrow::before{ content:""; width:6px; height:6px; border-radius:50%; background:var(--stamp); }
+
+  .auth-decoration h2{
+    font-family:var(--display); text-transform:uppercase;
+    font-size:30px; letter-spacing:.005em;
+    color:var(--paper); margin:0 0 14px; line-height:1.08; max-width:340px;
+  }
+  .auth-decoration h2 em{ font-style:normal; color:var(--kraft-light); }
+  .auth-decoration > p{ font-size:14px; line-height:1.7; color:rgba(246,241,231,.65); margin:0 0 8px; max-width:320px; }
+
+  /* floating animated box art — idle motion */
+  .float-stage{ display:flex; justify-content:center; align-items:center; margin:10px 0 22px; perspective:900px; }
+  .float-box{ animation:floatY 4.5s ease-in-out infinite; transform-style:preserve-3d; }
+  .float-box svg{ width:130px; height:130px; }
+  @keyframes floatY{
+    0%,100%{ transform:translateY(0) rotate(-2deg); }
+    50%{ transform:translateY(-14px) rotate(2deg); }
+  }
+  .float-shadow{
+    width:86px; height:12px; margin:0 auto;
+    background:radial-gradient(closest-side, rgba(0,0,0,.35), transparent 75%);
+    animation:shadowPulse 4.5s ease-in-out infinite;
+  }
+  @keyframes shadowPulse{
+    0%,100%{ transform:scale(1); opacity:.55; }
+    50%{ transform:scale(.78); opacity:.3; }
+  }
+
+  .signup-decoration-features{ display:flex; flex-direction:column; gap:12px; width:100%; margin-top:22px; }
+  .signup-decoration-feature{
+    display:flex; align-items:flex-start; gap:14px;
+    background:rgba(246,241,231,.06);
+    border:1px solid rgba(246,241,231,.12);
+    padding:15px 17px; border-radius:var(--radius-md);
+    transition:transform var(--dur) var(--ease), border-color var(--dur) var(--ease), background var(--dur) var(--ease);
+  }
+  .signup-decoration-feature:hover{ transform:translateX(4px); border-color:rgba(232,210,172,.4); background:rgba(246,241,231,.1); }
+  .signup-decoration-feature-icon{
+    width:32px; height:32px; border-radius:50%;
+    display:inline-flex; align-items:center; justify-content:center;
+    background:rgba(166,58,46,.2); color:var(--stamp);
+    flex-shrink:0;
+  }
+  .signup-decoration-feature-icon svg{ width:15px; height:15px; }
+  .signup-decoration-feature div{ font-size:12.5px; color:rgba(246,241,231,.65); line-height:1.5; }
+  .signup-decoration-feature strong{ font-family:var(--mono); text-transform:uppercase; letter-spacing:.02em; color:var(--paper); font-weight:700; display:block; margin-bottom:2px; font-size:12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="top-nav-btns">
+  <a href="index.html" class="nav-pill-btn">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M19 12H5" />
+      <path d="M12 19l-7-7 7-7" />
+    </svg>
+    Back to home
+  </a>
+</div>
+
+<div class="auth-root">
+
+  <div class="auth-card">
+    <div class="auth-card-inner">
+
+      <div class="auth-decoration-mobile"><strong>Paper&nbsp;&amp;&nbsp;Press</strong> — 1,400+ brands packaged</div>
+
+      <div class="auth-logo">
+        <svg viewBox="0 0 32 32" fill="none"><rect x="4" y="12" width="24" height="16" rx="1.5" fill="#B9895A" stroke="#1C1712" stroke-width="1.4"/><path d="M4 12L16 5L28 12" stroke="#1C1712" stroke-width="1.4" stroke-linejoin="round" fill="#E8D2AC"/><path d="M16 5V17" stroke="#1C1712" stroke-width="1" stroke-dasharray="2 2"/></svg>
+        <span>Paper&nbsp;<em>&amp;</em>&nbsp;Press</span>
+      </div>
+
+      <div class="signup-header">
+        <span class="badge-pill">Join as a partner</span>
+        <h1 class="signup-title">Create your <em>account.</em></h1>     
+        <p class="signup-subtitle">Set up access to quotes, proofs, and reorders in one place.</p>
+      </div>
+
+      <form class="signup-form" id="signup-form" novalidate>
+
+        <!-- Full Name -->
+        <div class="signup-form-group">
+          <label for="fullName">Full name</label>
+          <div class="signup-input-wrap" id="fullName-wrap">
+            <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a7 7 0 0114 0v1"/></svg>
+            <input type="text" id="fullName" name="fullName" placeholder="Jordan Lee" class="signup-input" autofocus maxlength="50">
+          </div>
+          <span class="signup-error" id="fullName-error"></span>
+          <span class="signup-hint">Only alphabets (A-Z) are allowed</span>
+        </div>
+
+        <!-- Company name -->
+        <div class="signup-form-group">
+          <label for="username">Company name</label>
+          <div class="signup-input-wrap" id="username-wrap">
+            <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18"/><path d="M9 21v-4h6v4"/><path d="M8 7h.01M12 7h.01M16 7h.01M8 11h.01M12 11h.01M16 11h.01"/></svg>
+            <input type="text" id="username" name="username" placeholder="Bloomfields" class="signup-input" maxlength="40">
+          </div>
+          <span class="signup-error" id="username-error"></span>
+          <span class="signup-hint">Letters, numbers, and spaces only</span>
+        </div>
+
+        <!-- Email -->
+        <div class="signup-form-group">
+          <label for="email">Work email</label>
+          <div class="signup-input-wrap" id="email-wrap">
+            <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            <input type="email" id="email" name="email" placeholder="you@company.com" class="signup-input">
+          </div>
+          <span class="signup-error" id="email-error"></span>
+          <span class="signup-hint">We'll send order &amp; proof updates here</span>
+        </div>
+
+        <!-- Password -->
+        <div class="signup-form-group">
+          <label for="password">Password</label>
+          <div class="signup-input-wrap" id="password-wrap">
+            <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+            <input type="password" id="password" name="password" placeholder="Create a password" class="signup-input" maxlength="30">
+            <button type="button" class="signup-password-toggle" id="password-toggle" aria-label="Show password">
+              <svg class="eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+          <span class="signup-error" id="password-error"></span>
+          <span class="signup-hint">Minimum 6 characters</span>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="signup-form-group">
+          <label for="confirmPassword">Confirm password</label>
+          <div class="signup-input-wrap" id="confirmPassword-wrap">
+            <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" class="signup-input" maxlength="30">
+            <button type="button" class="signup-password-toggle" id="confirm-password-toggle" aria-label="Show password">
+              <svg class="eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+          <span class="signup-error" id="confirmPassword-error"></span>
+        </div>
+
+        <!-- Terms -->
+        <div class="signup-terms">
+          <label class="signup-checkbox">
+            <input type="checkbox" id="acceptTerms" name="acceptTerms">
+            <span class="signup-checkbox-custom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+            I accept the <a href="terms.html" class="signup-terms-link" onclick="event.stopPropagation();">Terms &amp; Conditions</a>
+          </label>
+          <span class="signup-error signup-error--terms" id="acceptTerms-error"></span>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="roll-btn" id="submit-btn">
+          <span id="submit-content">Create account
+            <span class="signup-btn-arrow">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+            </span>
+          </span>
+        </button>
+      </form>
+
+      <div class="signup-divider"><span>or continue with</span></div>
+
+      <div class="signup-social">
+        <button type="button" class="signup-social-btn" id="social-google">Google</button>
+        <button type="button" class="signup-social-btn" id="social-microsoft">Microsoft</button>
+        <button type="button" class="signup-social-btn" id="social-apple">Apple</button>
+      </div>
+
+      <div class="signup-login">
+        <p>Already have an account? <a href="login.html" class="signup-login-link">Sign in</a></p>
+      </div>
+
+      <div class="auth-badge-status">Order tracking: all systems operational</div>
+
+    </div>
+  </div>
+
+  <div class="auth-decoration">
+    <div class="auth-decoration-inner">
+      <div class="auth-decoration-eyebrow">Partner portal</div>
+      <h2>One login. <em>Every run<br>you've ever placed.</em></h2>
+      <p>Set up your account once, and every quote, proof, and production run lives in a single dashboard.</p>
+
+      <div class="float-stage">
+        <div class="float-box">
+          <svg viewBox="0 0 140 140" fill="none">
+            <rect x="26" y="52" width="88" height="62" rx="2" fill="#B9895A" stroke="#F6F1E7" stroke-width="2"/>
+            <path d="M26 52L70 30L114 52" stroke="#F6F1E7" stroke-width="2" stroke-linejoin="round" fill="#E8D2AC"/>
+            <path d="M26 52L70 74L114 52" stroke="#F6F1E7" stroke-width="2" stroke-linejoin="round" fill="none"/>
+            <path d="M70 74V114" stroke="#F6F1E7" stroke-width="1.4" stroke-dasharray="3 3"/>
+            <rect x="54" y="88" width="32" height="18" rx="2" fill="#F6F1E7" opacity=".9"/>
+            <text x="70" y="100" text-anchor="middle" font-family="Space Mono, monospace" font-size="7" fill="#A63A2E">P&amp;P</text>
+          </svg>
+        </div>
+      </div>
+      <div class="float-shadow"></div>
+
+      <div class="signup-decoration-features">
+        <div class="signup-decoration-feature">
+          <span class="signup-decoration-feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16v13H4z"/><path d="M4 7l3-4h10l3 4"/></svg>
+          </span>
+          <div><strong>Instant reorders</strong>Re-run any past order in a couple of clicks</div>
+        </div>
+        <div class="signup-decoration-feature">
+          <span class="signup-decoration-feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+          </span>
+          <div><strong>Proof approvals</strong>Sign off on print files right from the dashboard</div>
+        </div>
+        <div class="signup-decoration-feature">
+          <span class="signup-decoration-feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>
+          </span>
+          <div><strong>Live order tracking</strong>Watch a run move from press to pallet</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  var formData = { fullName: "", username: "", email: "", password: "", confirmPassword: "", acceptTerms: false };
+  var showPassword = false;
+  var showConfirmPassword = false;
+  var isLoading = false;
+
+  var fields = ["fullName", "username", "email", "password", "confirmPassword"];
+  var els = {};
+  fields.concat(["acceptTerms"]).forEach(function (name) {
+    els[name] = document.getElementById(name);
+  });
+
+  var eyeIcon =
+    '<svg class="eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' +
+    '<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" /><circle cx="12" cy="12" r="3" /></svg>';
+  var eyeOffIcon =
+    '<svg class="eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' +
+    '<path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7a21.6 21.6 0 0 1 5.06-6.06M9.9 4.24A10.94 10.94 0 0 1 12 4c7 0 11 7 11 7a21.6 21.6 0 0 1-2.66 3.79" />' +
+    '<path d="M14.12 14.12a3 3 0 1 1-4.24-4.24" /><path d="M1 1l22 22" /></svg>';
+
+  function shake(el){
+    el.classList.remove('shake');
+    void el.offsetWidth;
+    el.classList.add('shake');
+  }
+
+  function validateFullName(value) {
+    var alphabetsOnly = /^[A-Za-z\s]+$/;
+    if (!value.trim()) return "Full name is required";
+    if (!alphabetsOnly.test(value)) return "Full name must contain only alphabets (A-Z)";
+    if (value.trim().length < 2) return "Full name must be at least 2 characters";
+    return "";
+  }
+  function validateUsername(value) {
+    var companyChars = /^[A-Za-z0-9\s&.,'-]+$/;
+    if (!value.trim()) return "Company name is required";
+    if (!companyChars.test(value)) return "Letters, numbers, and spaces only";
+    if (value.trim().length < 2) return "Company name must be at least 2 characters";
+    return "";
+  }
+  function validateEmail(value) {
+    var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!value) return "Work email is required";
+    if (!emailRegex.test(value)) return "Enter a valid email address";
+    return "";
+  }
+  function validatePassword(value) {
+    if (!value) return "Password is required";
+    if (value.length < 6) return "Password must be at least 6 characters";
+    return "";
+  }
+  function validateConfirmPassword(value) {
+    if (!value) return "Please confirm your password";
+    if (value !== formData.password) return "Passwords do not match";
+    return "";
+  }
+
+  function setError(name, message) {
+    var errEl = document.getElementById(name + "-error");
+    var wrapEl = document.getElementById(name + "-wrap");
+    var groupEl = errEl.closest(".signup-form-group");
+    if (message) {
+      errEl.textContent = message;
+      errEl.classList.add("show");
+      if (wrapEl){ wrapEl.classList.add("signup-input-wrap--error"); shake(wrapEl); }
+      if (groupEl) groupEl.classList.add("has-error");
+    } else {
+      errEl.textContent = "";
+      errEl.classList.remove("show");
+      if (wrapEl) wrapEl.classList.remove("signup-input-wrap--error");
+      if (groupEl) groupEl.classList.remove("has-error");
+    }
+  }
+
+  function validateField(name, value) {
+    var error = "";
+    switch (name) {
+      case "fullName": error = validateFullName(value); break;
+      case "username": error = validateUsername(value); break;
+      case "email": error = validateEmail(value); break;
+      case "password":
+        error = validatePassword(value);
+        if (formData.confirmPassword) {
+          setError("confirmPassword", validateConfirmPassword(formData.confirmPassword));
+        }
+        break;
+      case "confirmPassword": error = validateConfirmPassword(value); break;
+      case "acceptTerms": error = value ? "" : "Please accept the Terms & Conditions to continue"; break;
+    }
+    setError(name, error);
+    return error;
+  }
+
+  fields.forEach(function (name) {
+    els[name].addEventListener("input", function (e) {
+      var value = e.target.value;
+      if (name === "fullName") value = value.replace(/[^A-Za-z\s]/g, "");
+      e.target.value = value;
+      formData[name] = value;
+      // clear error state as they type; full validation happens on blur/submit
+      var errEl = document.getElementById(name + "-error");
+      var wrapEl = document.getElementById(name + "-wrap");
+      var groupEl = errEl.closest(".signup-form-group");
+      errEl.classList.remove("show");
+      if (wrapEl) wrapEl.classList.remove("signup-input-wrap--error");
+      if (groupEl) groupEl.classList.remove("has-error");
+    });
+    els[name].addEventListener("blur", function (e) {
+      validateField(name, e.target.value);
+    });
+  });
+
+  els.acceptTerms.addEventListener("change", function (e) {
+    formData.acceptTerms = e.target.checked;
+    validateField("acceptTerms", e.target.checked);
+  });
+
+  document.getElementById("password-toggle").addEventListener("click", function () {
+    showPassword = !showPassword;
+    els.password.type = showPassword ? "text" : "password";
+    this.innerHTML = showPassword ? eyeOffIcon : eyeIcon;
+    this.setAttribute("aria-label", showPassword ? "Hide password" : "Show password");
+  });
+
+  document.getElementById("confirm-password-toggle").addEventListener("click", function () {
+    showConfirmPassword = !showConfirmPassword;
+    els.confirmPassword.type = showConfirmPassword ? "text" : "password";
+    this.innerHTML = showConfirmPassword ? eyeOffIcon : eyeIcon;
+    this.setAttribute("aria-label", showConfirmPassword ? "Hide password" : "Show password");
+  });
+
+  document.getElementById("signup-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (isLoading) return;
+
+    var newErrors = {
+      fullName: validateFullName(formData.fullName),
+      username: validateUsername(formData.username),
+      email: validateEmail(formData.email),
+      password: validatePassword(formData.password),
+      confirmPassword: validateConfirmPassword(formData.confirmPassword),
+      acceptTerms: !formData.acceptTerms ? "Please accept the Terms & Conditions to continue" : ""
+    };
+    Object.keys(newErrors).forEach(function (name) { setError(name, newErrors[name]); });
+
+    var hasErrors = Object.keys(newErrors).some(function (k) { return newErrors[k] !== ""; });
+    if (!hasErrors) {
+      isLoading = true;
+      var btn = document.getElementById("submit-btn");
+      var content = document.getElementById("submit-content");
+      btn.disabled = true;
+      btn.classList.add("loading");
+      content.innerHTML = '<span class="signup-spinner"></span> Creating account...';
+
+      // demo only — replace with real account-creation call
+      setTimeout(function () {
+        window.location.href = "index.html";
+      }, 1500);
+    }
+  });
+
+  function handleSocialLogin() {
+    window.location.href = "index.html";
+  }
+  document.getElementById("social-google").addEventListener("click", handleSocialLogin);
+  document.getElementById("social-microsoft").addEventListener("click", handleSocialLogin);
+  document.getElementById("social-apple").addEventListener("click", handleSocialLogin);
+</script>
+
+</body>
+</html>

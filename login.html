@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign In — Pulp &amp; Press</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:        #1C1712;
+  --ink-soft:   #2A2119;
+  --ink-70:     rgba(28,23,18,.68);
+  --ink-45:     rgba(28,23,18,.45);
+  --ink-25:     rgba(28,23,18,.16);
+  --paper:      #F6F1E7;
+  --paper-dim:  #EDE3CE;
+  --white:      #FFFFFF;
+  --kraft:      #B9895A;
+  --kraft-deep: #8C6239;
+  --kraft-light:#E8D2AC;
+  --forest:     #45573A;
+  --stamp:      #A63A2E;
+  --stamp-pale: #F5E2DC;
+  --line:       rgba(28,23,18,.14);
+  --line-soft:  rgba(28,23,18,.08);
+  --radius-xl:26px;
+  --radius-lg:18px;
+  --radius-md:14px;
+  --radius-sm:10px;
+  --radius-pill:999px;
+  --shadow-sm:0 6px 18px -8px rgba(28,23,18,.16);
+  --shadow-md:0 18px 40px -14px rgba(28,23,18,.22);
+  --shadow-lg:0 40px 80px -24px rgba(28,23,18,.3);
+  --shadow-stamp:0 16px 34px -12px rgba(166,58,46,.35);
+  --display:'Anton','Arial Narrow',sans-serif;
+  --mono:'Space Mono',monospace;
+  --body:'Inter',sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --dur-fast:.22s;
+  --dur:.4s;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; }
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  position:relative;
+  overflow-x:hidden;
+}
+a{ color:inherit; text-decoration:none; }
+button{ font-family:inherit; cursor:pointer; background:none; border:none; color:inherit; }
+input{ font-family:inherit; color:inherit; }
+::selection{ background:var(--stamp); color:var(--paper); }
+:focus-visible{ outline:2px solid var(--stamp); outline-offset:3px; border-radius:4px; }
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+  }
+}
+
+body::before{
+  content:"";
+  position:fixed; inset:0;
+  background-image:repeating-linear-gradient(180deg, rgba(28,23,18,.035) 0px, rgba(28,23,18,.035) 1px, transparent 1px, transparent 9px);
+  z-index:0;
+  pointer-events:none;
+}
+body::after{
+  content:"";
+  position:fixed; inset:0;
+  background:radial-gradient(48% 40% at 50% 0%, var(--kraft-light) 0%, transparent 72%);
+  opacity:.55;
+  z-index:0;
+  pointer-events:none;
+}
+
+.bg-stamp{
+  position:fixed;
+  border-radius:50%;
+  border:1.5px solid var(--ink-25);
+  color:var(--ink-25);
+  display:flex; align-items:center; justify-content:center; text-align:center;
+  font-family:var(--mono); font-size:9px; letter-spacing:.05em; text-transform:uppercase; line-height:1.3;
+  z-index:0; pointer-events:none; opacity:.5;
+  animation:bgFloat 7s ease-in-out infinite;
+}
+.bg-stamp.s1{ width:90px; height:90px; top:12%; left:8%; transform:rotate(-8deg); animation-delay:0s; }
+.bg-stamp.s2{ width:70px; height:70px; bottom:14%; right:9%; transform:rotate(6deg); animation-delay:1.2s; }
+@keyframes bgFloat{ 0%,100%{ transform:translateY(0) rotate(-8deg); } 50%{ transform:translateY(-10px) rotate(-4deg); } }
+@media (max-width:900px){ .bg-stamp{ display:none; } }
+
+.top-nav-btns{
+  position:fixed; top:28px; left:28px; z-index:20;
+  display:flex; align-items:center; gap:10px;
+}
+.nav-pill-btn{
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--white);
+  border:1px solid var(--line);
+  color:var(--ink-70);
+  font-family:var(--mono);
+  font-size:12.5px; font-weight:700; letter-spacing:.03em; text-transform:uppercase;
+  padding:10px 20px 10px 14px;
+  border-radius:var(--radius-pill);
+  box-shadow:var(--shadow-sm);
+  transition:color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+}
+.nav-pill-btn:hover{ color:var(--stamp); border-color:var(--stamp); transform:translateY(-2px); box-shadow:var(--shadow-md); }
+.nav-pill-btn svg{ flex-shrink:0; }
+
+@media (max-width:1023px){
+  .top-nav-btns{ top:16px; left:16px; }
+  .nav-pill-btn{ font-size:11px; padding:7px 14px 7px 10px; }
+  .nav-pill-btn svg{ width:15px; height:15px; }
+}
+
+.auth-root{
+  position:relative; z-index:1;
+  width:100%; max-width:460px;
+  display:flex; align-items:center; justify-content:center;
+}
+
+.auth-card{ width:100%; opacity:0; transform:translateY(18px) scale(.98); animation:cardIn .7s var(--ease) .05s forwards; }
+@keyframes cardIn{ to{ opacity:1; transform:translateY(0) scale(1); } }
+
+.auth-card-inner{
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:var(--radius-xl);
+  padding:46px 40px 40px;
+  box-shadow:var(--shadow-lg);
+  text-align:left;
+  position:relative;
+  overflow:hidden;
+}
+.auth-card-inner::before{
+  content:"";
+  position:absolute; top:0; left:0; right:0; height:5px;
+  background:linear-gradient(90deg, var(--kraft), var(--stamp), var(--kraft-deep));
+  background-size:200% 100%;
+  animation:shimmer 5s linear infinite;
+}
+@keyframes shimmer{ to{ background-position:-200% 0; } }
+@media (max-width:480px){ .auth-card-inner{ padding:34px 24px 28px; border-radius:var(--radius-lg); } }
+
+.auth-logo{ display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:26px; }
+.auth-logo svg{ width:32px; height:32px; }
+.auth-logo span{ font-family:var(--display); font-size:20px; letter-spacing:.01em; text-transform:uppercase; }
+.auth-logo span em{ font-style:normal; color:var(--stamp); }
+
+.badge-pill{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:7px 16px;
+  border:1px solid var(--line);
+  border-radius:var(--radius-pill);
+  font-family:var(--mono);
+  font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--stamp);
+  background:var(--stamp-pale);
+  margin-bottom:20px;
+}
+.badge-pill::before{ content:""; width:6px; height:6px; border-radius:50%; background:var(--stamp); flex-shrink:0; animation:dotPulse 1.8s ease-in-out infinite; }
+@keyframes dotPulse{ 0%,100%{ opacity:1; } 50%{ opacity:.35; } }
+
+.auth-title{
+  font-family:var(--display);
+  text-transform:uppercase;
+  font-size:clamp(26px, 5vw, 32px);
+  line-height:1.04;
+  letter-spacing:.005em;
+  color:var(--ink);
+  margin:0 0 10px;
+}
+.auth-title em{ font-style:normal; color:var(--stamp); }
+
+.auth-subtitle{
+  font-size:14.5px;
+  color:var(--ink-70);
+  line-height:1.65;
+  margin:0 0 26px;
+  max-width:380px;
+}
+
+.role-toggle{
+  position:relative;
+  display:grid; grid-template-columns:1fr 1fr;
+  background:var(--paper);
+  border:1.5px solid var(--line);
+  border-radius:var(--radius-pill);
+  padding:4px;
+  margin-bottom:22px;
+  opacity:0; transform:translateY(10px);
+  animation:fieldIn .55s var(--ease) .08s forwards;
+}
+.role-toggle-indicator{
+  position:absolute; top:4px; left:4px;
+  width:calc(50% - 4px); height:calc(100% - 8px);
+  background:var(--ink);
+  border-radius:var(--radius-pill);
+  transition:transform var(--dur) var(--ease);
+  z-index:0;
+}
+.role-toggle[data-role="admin"] .role-toggle-indicator{ transform:translateX(100%); }
+.role-btn{
+  position:relative; z-index:1;
+  display:flex; align-items:center; justify-content:center; gap:7px;
+  padding:11px 10px;
+  border-radius:var(--radius-pill);
+  font-family:var(--mono); font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+  color:var(--ink-70);
+  transition:color var(--dur-fast) var(--ease);
+}
+.role-btn svg{ width:15px; height:15px; flex-shrink:0; }
+.role-toggle[data-role="user"] .role-btn.role-user,
+.role-toggle[data-role="admin"] .role-btn.role-admin{ color:var(--paper); }
+
+.auth-form{ display:flex; flex-direction:column; gap:18px; }
+.field{
+  opacity:0; transform:translateY(10px);
+  animation:fieldIn .55s var(--ease) forwards;
+}
+.field:nth-of-type(1){ animation-delay:.16s; }
+.field:nth-of-type(2){ animation-delay:.23s; }
+@keyframes fieldIn{ to{ opacity:1; transform:translateY(0); } }
+
+.field-label{
+  display:block;
+  font-family:var(--mono);
+  font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--ink-70); font-weight:700;
+  margin-bottom:8px;
+}
+.field-input-wrap{
+  position:relative;
+  border:1.5px solid var(--line);
+  border-radius:var(--radius-sm);
+  background:var(--paper);
+  transition:border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+  display:flex; align-items:center;
+}
+.field-input-wrap:focus-within{
+  border-color:var(--stamp);
+  background:var(--white);
+  box-shadow:0 0 0 4px var(--stamp-pale);
+}
+.field-input-wrap.shake{ animation:shake .45s var(--ease); border-color:var(--stamp); }
+@keyframes shake{
+  10%,90%{ transform:translateX(-1px); }
+  20%,80%{ transform:translateX(3px); }
+  30%,50%,70%{ transform:translateX(-6px); }
+  40%,60%{ transform:translateX(6px); }
+}
+
+.field-icon{ width:18px; height:18px; margin-left:14px; color:var(--ink-45); flex-shrink:0; transition:color var(--dur-fast) var(--ease); }
+.field-input-wrap:focus-within .field-icon{ color:var(--stamp); }
+
+.field-input-wrap input{
+  width:100%;
+  border:none; outline:none; background:transparent;
+  padding:14px 14px 14px 10px;
+  font-size:14.5px; color:var(--ink);
+}
+.field-input-wrap input::placeholder{ color:var(--ink-45); }
+
+.field-toggle{
+  display:flex; align-items:center; justify-content:center;
+  width:40px; height:40px; flex-shrink:0; margin-right:4px;
+  color:var(--ink-45);
+  transition:color var(--dur-fast) var(--ease);
+  border-radius:8px;
+}
+.field-toggle:hover{ color:var(--stamp); }
+.field-toggle svg{ width:18px; height:18px; }
+.field-toggle .eye-off{ display:none; }
+.field-toggle.showing .eye{ display:none; }
+.field-toggle.showing .eye-off{ display:block; }
+
+.field-row{
+  display:flex; align-items:center; justify-content:space-between;
+  opacity:0; transform:translateY(10px);
+  animation:fieldIn .55s var(--ease) .3s forwards;
+}
+.remember-check{ display:flex; align-items:center; gap:9px; cursor:pointer; user-select:none; }
+.remember-box{
+  width:18px; height:18px; border-radius:5px; border:1.5px solid var(--ink-25);
+  display:flex; align-items:center; justify-content:center;
+  background:var(--white);
+  transition:background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+}
+.remember-box svg{ width:11px; height:11px; opacity:0; transform:scale(.5); transition:opacity .2s var(--ease), transform .2s var(--ease); color:var(--white); }
+.remember-check input{ display:none; }
+.remember-check input:checked + .remember-box{ background:var(--stamp); border-color:var(--stamp); }
+.remember-check input:checked + .remember-box svg{ opacity:1; transform:scale(1); }
+.remember-check span{ font-size:13px; color:var(--ink-70); font-weight:500; }
+.forgot-link{
+  font-family:var(--mono); font-size:12px; letter-spacing:.02em; font-weight:700; color:var(--stamp);
+  position:relative;
+}
+.forgot-link::after{ content:""; position:absolute; left:0; bottom:-2px; width:0; height:1px; background:var(--stamp); transition:width var(--dur-fast) var(--ease); }
+.forgot-link:hover::after{ width:100%; }
+
+.roll-btn{
+  position:relative;
+  display:inline-flex; align-items:center; justify-content:center; gap:12px;
+  padding:16px 26px;
+  border-radius:var(--radius-pill);
+  font-family:var(--mono);
+  font-size:13px; font-weight:700; letter-spacing:.05em; text-transform:uppercase;
+  overflow:hidden; isolation:isolate;
+  width:100%;
+  transition:transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+  opacity:0; transform:translateY(10px);
+  animation:fieldIn .55s var(--ease) .38s forwards;
+}
+.roll-btn::before{
+  content:""; position:absolute; inset:0;
+  background:var(--ink);
+  transform:translateY(102%);
+  transition:transform var(--dur) var(--ease);
+  z-index:0;
+}
+.roll-btn:hover::before{ transform:translateY(0); }
+.roll-btn:hover{ transform:translateY(-2px); box-shadow:var(--shadow-stamp); }
+.roll-btn:active{ transform:translateY(0) scale(.98); }
+.roll-btn.orange{ background:var(--stamp); color:var(--paper); }
+.roll-btn.loading .roll-text{ opacity:0; }
+.roll-btn.loading .roll-arrow{ opacity:0; }
+.roll-text{ position:relative; z-index:1; transition:opacity .2s var(--ease); }
+.roll-arrow{
+  position:relative; z-index:1;
+  display:inline-flex; align-items:center; justify-content:center;
+  width:17px; height:17px;
+  transition:transform var(--dur-fast) var(--ease), opacity .2s var(--ease);
+}
+.roll-arrow svg{ width:100%; height:100%; }
+.roll-btn:hover .roll-arrow{ transform:translate(3px,-3px); }
+
+.btn-spinner{
+  position:absolute; z-index:1; width:18px; height:18px;
+  border:2px solid rgba(246,241,231,.35); border-top-color:var(--paper);
+  border-radius:50%; opacity:0;
+  transition:opacity .2s var(--ease);
+}
+.roll-btn.loading .btn-spinner{ opacity:1; animation:spin .7s linear infinite; }
+@keyframes spin{ to{ transform:rotate(360deg); } }
+
+.roll-btn.success{ background:var(--forest); }
+.roll-btn.success .btn-spinner{ opacity:0; }
+.check-icon{ position:absolute; z-index:1; width:19px; height:19px; opacity:0; transform:scale(.5); transition:opacity .25s var(--ease), transform .25s var(--ease); }
+.roll-btn.success .check-icon{ opacity:1; transform:scale(1); }
+.roll-btn.success .roll-text, .roll-btn.success .roll-arrow{ opacity:0; }
+
+.auth-divider{
+  display:flex; align-items:center; gap:14px; margin:26px 0 20px;
+  opacity:0; animation:fieldIn .5s var(--ease) .44s forwards;
+}
+.auth-divider::before, .auth-divider::after{ content:""; flex:1; height:1px; background:var(--line); }
+.auth-divider span{ font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-45); }
+
+.auth-footer-text{
+  text-align:center; font-size:13.5px; color:var(--ink-70);
+  opacity:0; animation:fieldIn .5s var(--ease) .5s forwards;
+}
+.auth-footer-text a{ font-weight:700; color:var(--stamp); position:relative; }
+.auth-footer-text a::after{ content:""; position:absolute; left:0; bottom:-2px; width:0; height:1px; background:var(--stamp); transition:width var(--dur-fast) var(--ease); }
+.auth-footer-text a:hover::after{ width:100%; }
+
+.auth-badge-status{
+  display:flex; align-items:center; gap:8px;
+  margin-top:26px; justify-content:center;
+  font-family:var(--mono);
+  font-size:10.5px; letter-spacing:.03em; text-transform:uppercase;
+  color:var(--ink-45); font-weight:600;
+  opacity:0; animation:fieldIn .5s var(--ease) .56s forwards;
+}
+.auth-badge-status::before{
+  content:""; width:7px; height:7px; border-radius:50%;
+  background:var(--forest); flex-shrink:0;
+  box-shadow:0 0 0 3px rgba(69,87,58,.15);
+}
+</style>
+</head>
+<body>
+
+<div class="bg-stamp s1">FSC<br>Certified</div>
+<div class="bg-stamp s2">Curbside<br>Recyclable</div>
+
+<div class="top-nav-btns">
+  <a href="index.html" class="nav-pill-btn">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M19 12H5" />
+      <path d="M12 19l-7-7 7-7" />
+    </svg>
+    Back to home
+  </a>
+</div>
+
+<div class="auth-root">
+
+  <div class="auth-card">
+    <div class="auth-card-inner">
+
+      <div class="auth-logo">
+        <svg viewBox="0 0 32 32" fill="none"><rect x="4" y="12" width="24" height="16" rx="1.5" fill="#B9895A" stroke="#1C1712" stroke-width="1.4"/><path d="M4 12L16 5L28 12" stroke="#1C1712" stroke-width="1.4" stroke-linejoin="round" fill="#E8D2AC"/><path d="M16 5V17" stroke="#1C1712" stroke-width="1" stroke-dasharray="2 2"/></svg>
+        <span>Paper&nbsp;<em>&amp;</em>&nbsp;Press</span>
+      </div>
+
+      <div style="text-align:center;">
+        <span class="badge-pill">Partner sign in</span>
+      </div>
+
+      <h1 class="auth-title" style="text-align:center;">Welcome back <em>to the dock.</em></h1>
+      <p class="auth-subtitle" style="text-align:center; margin-left:auto; margin-right:auto;">Sign in to track orders, approve proofs, and reorder your stock packaging.</p>
+
+      <div class="role-toggle" id="role-toggle" data-role="user">
+        <div class="role-toggle-indicator"></div>
+        <button type="button" class="role-btn role-user" data-role-value="user">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a7 7 0 0114 0v1"/></svg>
+          User
+        </button>
+        <button type="button" class="role-btn role-admin" data-role-value="admin">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg>
+          Admin
+        </button>
+      </div>
+
+      <form class="auth-form" id="login-form" novalidate>
+        <div class="field">
+          <label class="field-label" for="email">Email address</label>
+          <div class="field-input-wrap" id="email-wrap">
+            <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            <input type="email" id="email" name="email" placeholder="you@company.com" autocomplete="email" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="password">Password</label>
+          <div class="field-input-wrap" id="password-wrap">
+            <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+            <input type="password" id="password" name="password" placeholder="Enter your password" autocomplete="current-password" required>
+            <button type="button" class="field-toggle" id="pw-toggle" aria-label="Show password">
+              <svg class="eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+              <svg class="eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.94 10.94 0 0112 19c-7 0-11-7-11-7a21.6 21.6 0 015.06-6.06M9.9 4.24A10.94 10.94 0 0112 4c7 0 11 7 11 7a21.6 21.6 0 01-2.66 3.79"/><path d="M14.12 14.12a3 3 0 11-4.24-4.24"/><path d="M1 1l22 22"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <label class="remember-check">
+            <input type="checkbox" id="remember" checked>
+            <span class="remember-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span>Keep me signed in</span>
+          </label>
+          <a href="reset-password.html" class="forgot-link">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="roll-btn orange" id="submit-btn">
+          <span class="roll-text" id="submit-label">Sign in as User</span>
+          <span class="roll-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></span>
+          <span class="btn-spinner"></span>
+          <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </button>
+      </form>
+
+      <div class="auth-divider"><span>New to Pulp &amp; Press</span></div>
+
+      <p class="auth-footer-text">Don't have an account yet? <a href="signup.html">Create an account</a></p>
+
+      <div class="auth-badge-status">Order tracking: all systems operational</div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const roleToggle = document.getElementById('role-toggle');
+  const submitLabel = document.getElementById('submit-label');
+  let selectedRole = 'user';
+
+  roleToggle.querySelectorAll('.role-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      selectedRole = btn.getAttribute('data-role-value');
+      roleToggle.setAttribute('data-role', selectedRole);
+      submitLabel.textContent = selectedRole === 'admin' ? 'Sign in as Admin' : 'Sign in as User';
+    });
+  });
+
+  const pwToggle = document.getElementById('pw-toggle');
+  const pwInput = document.getElementById('password');
+  pwToggle.addEventListener('click', () => {
+    const showing = pwToggle.classList.toggle('showing');
+    pwInput.type = showing ? 'text' : 'password';
+    pwToggle.setAttribute('aria-label', showing ? 'Hide password' : 'Show password');
+  });
+
+  const form = document.getElementById('login-form');
+  const submitBtn = document.getElementById('submit-btn');
+  const emailWrap = document.getElementById('email-wrap');
+  const passwordWrap = document.getElementById('password-wrap');
+  const emailInput = document.getElementById('email');
+
+  function shake(el){
+    el.classList.remove('shake');
+    void el.offsetWidth;
+    el.classList.add('shake');
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let valid = true;
+
+    if (!emailInput.value || !emailInput.checkValidity()){
+      shake(emailWrap);
+      valid = false;
+    }
+    if (!pwInput.value){
+      shake(passwordWrap);
+      valid = false;
+    }
+    if (!valid) return;
+
+    submitBtn.classList.add('loading');
+    submitBtn.setAttribute('disabled', 'true');
+
+    setTimeout(() => {
+      try {
+        localStorage.setItem('user', JSON.stringify({ email: emailInput.value, role: selectedRole }));
+        localStorage.setItem('isAuthenticated', 'true');
+      } catch (err) {}
+
+      submitBtn.classList.remove('loading');
+      submitBtn.classList.add('success');
+
+      setTimeout(() => {
+        window.location.href = selectedRole === 'admin' ? 'admindashboard.html' : 'dashboard.html';
+      }, 550);
+    }, 1100);
+  });
+</script>
+
+</body>
+</html>

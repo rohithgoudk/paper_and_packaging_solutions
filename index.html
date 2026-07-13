@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paper & Press — Custom Paper & Packaging Solutions</title>
+<meta name="description" content="Paper & Press designs, prints, and manufactures corrugated, kraft, and custom retail packaging — from first prototype to pallet.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+<!-- ======================= HEADER ======================= -->
+<header class="site-header" id="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo-slot" aria-label="Homepage">
+      <img src="./Assets/logo.webp" alt="Paper & Press logo" class="logo-img">
+      
+    </a>
+
+    <nav class="header-nav">
+      <a href="#home" class="active">Home</a>
+      <a href="#products">Products</a>
+      <a href="#process">Process</a>
+      <a href="#sustainability">Sustainability</a>
+      <a href="#work">Work</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="header-right">
+      <button class="roll-btn ghost header-login-btn" onclick="window.location.href='login.html';">
+        
+          <span>Login</span>
+        </span></span>
+      </button>
+      
+    </div>
+
+    <button class="nav-toggle" id="menu-toggle" aria-label="Open menu">
+      <span class="hamburger"><span></span><span></span><span></span></span>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-menu-backdrop" id="menu-backdrop"></div>
+    <div class="mobile-sheet">
+      <div class="mobile-nav-links">
+        <a href="#home">Home</a>
+        <a href="#products">Products</a>
+        <a href="#process">Process</a>
+        <a href="#sustainability">Sustainability</a>
+        <a href="#work">Work</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="mobile-sheet-actions">
+        <button class="roll-btn ghost" style="color:var(--paper); border-color:var(--line-light);" onclick="window.location.href='login.html';">
+          <span class="roll-text"><span class="roll-text-inner">
+            <span>Login</span>
+            <span>Login</span>
+          </span></span>
+        </button>
+        <button class="roll-btn orange" onclick="window.location.href='quote.html';">
+          <span class="roll-text"><span class="roll-text-inner">
+            <span>Request a quote</span>
+            <span>Request a quote</span>
+          </span></span>
+          <span class="roll-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="19" x2="19" y2="5"/><polyline points="9 5 19 5 19 15"/></svg></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ======================= HERO ======================= -->
+<section class="hero" id="home">
+  <div class="hero-grain" aria-hidden="true"></div>
+  <div class="wrap px hero-inner">
+    <div>
+      <div class="hero-eyebrow eyebrow"><span class="dot"></span>Paper &amp; packaging, made to order</div>
+      <h1 class="hero-headline">Packaging<br>that holds up.<br><em>And opens right.</em></h1>
+      <p class="hero-sub">We design, print, and manufacture corrugated boxes, kraft mailers, and custom retail packaging — built for the shelf, the doorstep, and everything in between.</p>
+      <div class="hero-cta-row">
+        <button class="roll-btn orange big" onclick="window.location.href='quote.html';">
+          <span class="roll-text"><span class="roll-text-inner">
+            <span>Start your project</span>
+            <span>Start your project</span>
+          </span></span>
+          <span class="roll-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="19" x2="19" y2="5"/><polyline points="9 5 19 5 19 15"/></svg></span>
+        </button>
+        <button class="roll-btn ghost big" style="color:var(--paper); border-color:var(--line-light);" onclick="window.location.href='samples.html';">
+          <span class="roll-text"><span class="roll-text-inner">
+            <span>Order a sample kit</span>
+            <span>Order a sample kit</span>
+          </span></span>
+        </button>
+      </div>
+      <div class="hero-meta">
+        <div><strong>1,400+</strong>brands packaged</div>
+        <div><strong>38</strong>countries shipped</div>
+        <div><strong>92%</strong>recycled fibre avg.</div>
+      </div>
+    </div>
+
+    <div class="box-stage" aria-hidden="true">
+      <div class="box-art">
+        <div class="flap left"></div>
+        <div class="flap right"></div>
+        <div class="flap bottom"></div>
+        <div class="flap top"></div>
+        <div class="box-base"><span class="stamp-mark">Handled<br>with care</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
+</section>
+
+<!-- ======================= TORN DIVIDER ======================= -->
+<div class="torn" aria-hidden="true">
+  <svg viewBox="0 0 1200 34" preserveAspectRatio="none"><path d="M0,34 L0,10 L20,16 L42,4 L66,18 L90,6 L114,20 L140,8 L166,22 L192,10 L218,20 L246,6 L272,18 L300,8 L328,22 L356,10 L384,20 L412,6 L440,18 L468,8 L498,22 L526,10 L554,18 L582,6 L610,20 L638,8 L666,22 L696,10 L724,18 L752,6 L780,20 L808,8 L836,22 L866,10 L894,18 L922,6 L950,20 L978,8 L1008,22 L1036,10 L1064,18 L1092,6 L1120,20 L1148,8 L1176,18 L1200,10 L1200,34 Z" fill="#F6F1E7"/></svg>
+</div>
+
+<!-- ======================= STATS BAR ======================= -->
+<section class="section-dark flute-bg-dark" style="padding:52px 0;">
+  <div class="wrap px">
+    <div class="stats-grid">
+      <div><div class="stat-number">1,400+</div><div class="stat-label">Brands packaged</div></div>
+      <div><div class="stat-number">6</div><div class="stat-label">Production facilities</div></div>
+      <div><div class="stat-number">48hr</div><div class="stat-label">Prototype turnaround</div></div>
+      <div><div class="stat-number">92%</div><div class="stat-label">Avg. recycled fibre</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= ABOUT ======================= -->
+<section class="section-white" id="about">
+  <div class="wrap px">
+    <div class="badge-row"><span class="badge-pill">Who we are</span></div>
+    <h2 class="section-heading">From pulp to package, <em>we run the whole sheet.</em></h2>
+
+    <div class="about-grid">
+      <div class="about-copy reveal">
+        <p>Pulp &amp; Press started in a single die-cutting shop and grew into a full paper-goods manufacturer without ever losing the parts our first customers liked: fast samples, honest pricing, and a crew that answers the phone.</p>
+        <p style="margin-top:18px;">Today we design structure, print the outside, and box up what's inside — for e-commerce brands shipping their first hundred units and manufacturers shipping their millionth.</p>
+        <button class="roll-btn dark" onclick="window.location.href='about.html';">
+          <span class="roll-text"><span class="roll-text-inner">
+            <span>Our story</span>
+            <span>Our story</span>
+          </span></span>
+          <span class="roll-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="19" x2="19" y2="5"/><polyline points="9 5 19 5 19 15"/></svg></span>
+        </button>
+      </div>
+
+      <div class="about-swatches reveal">
+        <div class="swatch tall sw-1"><img src="./Assets/about-corrugate.webp" alt="Stack of corrugated sheets on the production floor"><span>Corrugating</span></div>
+        <div class="swatch sw-2"><img src="./Assets/about-print.webp" alt="Custom print run on kraft board"><span>Printing</span></div>
+        <div class="swatch sw-3"><img src="./Assets/about-fold.webp" alt="Hand-folding a finished retail box"><span>Finishing</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PRODUCTS ======================= -->
+<section class="section-cream flute-bg" id="products">
+  <div class="wrap px">
+    <div class="badge-row"><span class="badge-pill">What we make</span></div>
+    <h2 class="section-heading">Six product lines, <em>one production run away.</em></h2>
+
+    <div class="product-grid" style="margin-top:44px;">
+
+      <div class="product-card reveal">
+        <span class="product-num">01</span>
+        <svg class="product-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8l9-5 9 5-9 5-9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
+        <h3>Corrugated shipping boxes</h3>
+        <p>Single, double, and triple-wall stock built to your SKU dimensions, tested for the drop and the belt.</p>
+      </div>
+
+      <div class="product-card reveal">
+        <span class="product-num">02</span>
+        <svg class="product-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16v13H4z"/><path d="M4 7l3-4h10l3 4"/><path d="M9 11h6"/></svg>
+        <h3>Kraft mailers &amp; bags</h3>
+        <p>Peel-and-seal mailers and twist-handle bags in FSC-certified kraft, printed edge to edge.</p>
+      </div>
+
+      <div class="product-card reveal">
+        <span class="product-num">03</span>
+        <svg class="product-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 9h16"/><path d="M9 9v11"/></svg>
+        <h3>Custom retail boxes</h3>
+        <p>Rigid and folding cartons with foil, emboss, or soft-touch finish — designed to be unboxed, not just opened.</p>
+      </div>
+
+      <div class="product-card reveal">
+        <span class="product-num">04</span>
+        <svg class="product-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v18"/><path d="M4 8l8-5 8 5"/><path d="M4 16l8 5 8-5"/></svg>
+        <h3>Protective inserts</h3>
+        <p>Die-cut honeycomb and molded pulp inserts that hold fragile product still without foam.</p>
+      </div>
+
+      <div class="product-card reveal">
+        <span class="product-num">05</span>
+        <svg class="product-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 4h14v16l-7-4-7 4V4z"/></svg>
+        <h3>Eco void-fill</h3>
+        <p>Crinkle paper, honeycomb wrap, and starch-based air pillows — every filler here breaks down.</p>
+      </div>
+
+      <div class="product-card reveal">
+        <span class="product-num">06</span>
+        <svg class="product-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h9l5 5v13H6z"/><path d="M15 3v5h5"/><path d="M9 13h6"/><path d="M9 17h4"/></svg>
+        <h3>Custom print &amp; finishing</h3>
+        <p>Flexo, litho, and digital short-run printing, plus foil stamping, spot UV, and die-cutting in house.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PROCESS ======================= -->
+<section class="section-dark" id="process">
+  <div class="wrap px">
+    <div class="badge-row"><span class="badge-pill on-dark">How a project moves</span></div>
+    <h2 class="section-heading" style="color:var(--paper);">Four stages. <em>Same team the whole way.</em></h2>
+
+    <div class="process-row" style="margin-top:44px;">
+      <div class="process-step">
+        <span class="num">01 / Design</span>
+        <h3>Structure &amp; art</h3>
+        <p>Our structural designers model your box to the product, then our art team lays out the print file around it.</p>
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+      </div>
+      <div class="process-step">
+        <span class="num">02 / Prototype</span>
+        <h3>Sample &amp; sign-off</h3>
+        <p>A physical white or print-accurate sample ships to you within 48 hours for approval before tooling.</p>
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+      </div>
+      <div class="process-step">
+        <span class="num">03 / Produce</span>
+        <h3>Short or long run</h3>
+        <p>From 250-unit digital runs to 500,000-unit flexo orders, produced across our six facilities.</p>
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+      </div>
+      <div class="process-step">
+        <span class="num">04 / Deliver</span>
+        <h3>Palletized &amp; tracked</h3>
+        <p>Freight booked, palletized, and tracked to your warehouse or 3PL — with reorder points set for next time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= INDUSTRIES ======================= -->
+<section class="section-white" id="industries">
+  <div class="wrap px">
+    <div class="badge-row"><span class="badge-pill">Who we pack for</span></div>
+    <h2 class="section-heading tight">Built for the industries <em>that ship the most.</em></h2>
+
+    <div class="industry-grid" style="margin-top:40px;">
+      <div class="industry-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 9l9-6 9 6-9 6-9-6z"/><path d="M3 9v6l9 6 9-6V9"/></svg><span>E-commerce</span></div>
+      <div class="industry-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 3h16v18H4z"/><path d="M9 21V12h6v9"/></svg><span>Food &amp; beverage</span></div>
+      <div class="industry-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg><span>Beauty &amp; cosmetics</span></div>
+      <div class="industry-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 7h6"/></svg><span>Electronics</span></div>
+      <div class="industry-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 3h8l-1 6 3 6a4 4 0 01-4 6H10a4 4 0 01-4-6l3-6z"/></svg><span>Wine &amp; spirits</span></div>
+      <div class="industry-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20V10l8-6 8 6v10"/><path d="M9 20v-6h6v6"/></svg><span>Home &amp; furniture</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= TORN DIVIDER ======================= -->
+<div class="torn" aria-hidden="true">
+  <svg viewBox="0 0 1200 34" preserveAspectRatio="none"><path d="M0,0 L0,24 L20,18 L42,30 L66,16 L90,28 L114,14 L140,26 L166,12 L192,24 L218,14 L246,28 L272,16 L300,26 L328,12 L356,24 L384,14 L412,28 L440,16 L468,26 L498,12 L526,24 L554,16 L582,28 L610,14 L638,26 L666,12 L696,24 L724,16 L752,28 L780,14 L808,26 L836,12 L866,24 L894,16 L922,28 L950,14 L978,26 L1008,12 L1036,24 L1064,16 L1092,28 L1120,14 L1148,26 L1176,16 L1200,24 L1200,0 Z" fill="#EDE3CE"/></svg>
+</div>
+
+<!-- ======================= SUSTAINABILITY ======================= -->
+<section class="section-cream flute-bg" id="sustainability">
+  <div class="wrap px">
+    <div class="sustain-grid">
+      <div class="reveal">
+        <div class="badge-row"><span class="badge-pill">Sustainability</span></div>
+        <h2 class="section-heading tight">Fibre we can <em>trace back to the forest.</em></h2>
+        <p style="margin-top:20px; font-size:15px; line-height:1.75; color:var(--ink-soft); max-width:460px;">Every board we run is FSC or SFI certified, and 92% of our fibre by volume is recycled content. Off-cuts from your run go back into our own pulp stream rather than a landfill.</p>
+        <div class="stats-grid" style="margin-top:32px; grid-template-columns:repeat(3,1fr);">
+          <div><div class="stat-number" style="color:var(--forest);">92%</div><div class="stat-label" style="color:var(--ink-soft);">Recycled fibre</div></div>
+          <div><div class="stat-number" style="color:var(--forest);">100%</div><div class="stat-label" style="color:var(--ink-soft);">Curbside recyclable</div></div>
+          <div><div class="stat-number" style="color:var(--forest);">0</div><div class="stat-label" style="color:var(--ink-soft);">Plastic laminates</div></div>
+        </div>
+      </div>
+      <div class="stamp-cluster reveal">
+        <div class="stamp">FSC<br>Certified</div>
+        <div class="stamp">Curbside<br>Recyclable</div>
+        <div class="stamp">Soy-Based<br>Inks</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= WORK / PORTFOLIO ======================= -->
+<section class="section-white" id="work">
+  <div class="wrap px">
+    <div class="badge-row"><span class="badge-pill gray-300">Recent work</span></div>
+    <h2 class="big-heading">Boxes we've shipped<br class="desktop-break"> off the line.</h2>
+
+    <div class="cards-grid">
+      <a href="404.html" class="media-card">
+        <div class="media-frame ratio-4x3">
+          <img src="./Assets/work-mailer.webp" alt="Custom printed kraft mailer for a skincare brand">
+        </div>
+        <div class="media-caption">
+          <p class="desc">A twist-handle kraft mailer redesign that cut return damage by 40%.</p>
+          <p class="title">Bloomfield Skincare</p>
+        </div>
+      </a>
+
+      <a href="404.html" class="media-card">
+        <div class="media-frame ratio-square">
+          <img src="./Assets/work-retailbox.webp" alt="Rigid retail box with foil logo for an electronics brand">
+        </div>
+        <div class="media-caption">
+          <p class="desc">A rigid unboxing carton with foil emboss for a hardware launch.</p>
+          <p class="title">Northstar Audio</p>
+        </div>
+      </a>
+
+      <a href="404.html" class="media-card">
+        <div class="media-frame ratio-4x3">
+          <img src="./Assets/work-mover.webp" alt="Stack of corrugated shipping boxes for a subscription box company">
+        </div>
+        <div class="media-caption">
+          <p class="desc">A right-sized shipper that dropped this brand's dim-weight cost 18%.</p>
+          <p class="title">Fernway Coffee Co.</p>
+        </div>
+      </a>
+
+      <a href="404.html" class="media-card">
+        <div class="media-frame ratio-square">
+          <img src="./Assets/work-winebox.webp" alt="Custom printed wine shipping box with molded pulp insert">
+        </div>
+        <div class="media-caption">
+          <p class="desc">A molded-pulp insert that replaced foam across a six-bottle case.</p>
+          <p class="title">Hollow Creek Cellars</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= TESTIMONIALS ======================= -->
+<section class="section-cream flute-bg" id="testimonials">
+  <div class="wrap px">
+    <div class="badge-row"><span class="badge-pill">In their words</span></div>
+    <h2 class="section-heading tight">What runs through <em>our press.</em></h2>
+  </div>
+
+  <div class="testi-track-wrap">
+    <div class="testi-track" id="testi-track">
+      <div class="testi-card"><p class="testi-quote">"Sample arrived in two days. First production run arrived exactly like the sample."</p><div class="testi-person"><div class="testi-avatar"><img src="./Assets/testi-1.webp" alt="Portrait of Renee A."></div><div><p>Renee A.</p><p>Ops Lead, Bloomfield Skincare</p></div></div></div>
+      <div class="testi-card"><p class="testi-quote">"They rebuilt our box around the product instead of selling us their standard size."</p><div class="testi-person"><div class="testi-avatar"><img src="./Assets/testi-2.webp" alt="Portrait of Marcus T."></div><div><p>Marcus T.</p><p>Founder, Northstar Audio</p></div></div></div>
+      <div class="testi-card"><p class="testi-quote">"Dim-weight savings alone paid for the redesign inside one quarter."</p><div class="testi-person"><div class="testi-avatar"><img src="./Assets/testi-3.webp" alt="Portrait of Priya K."></div><div><p>Priya K.</p><p>Supply Chain, Fernway Coffee</p></div></div></div>
+      <div class="testi-card"><p class="testi-quote">"Our fragile SKUs stopped coming back broken the month we switched inserts."</p><div class="testi-person"><div class="testi-avatar"><img src="./Assets/testi-4.webp" alt="Portrait of Daniel W."></div><div><p>Daniel W.</p><p>Owner, Hollow Creek Cellars</p></div></div></div>
+      <!-- duplicate set for seamless marquee -->
+      <div class="testi-card" aria-hidden="true"><p class="testi-quote">"Sample arrived in two days. First production run arrived exactly like the sample."</p><div class="testi-person"><div class="testi-avatar"><img src="./Assets/testi-1.webp" alt=""></div><div><p>Renee A.</p><p>Ops Lead, Bloomfield Skincare</p></div></div></div>
+      <div class="testi-card" aria-hidden="true"><p class="testi-quote">"They rebuilt our box around the product instead of selling us their standard size."</p><div class="testi-person"><div class="testi-avatar"><img src="./Assets/testi-2.webp" alt=""></div><div><p>Marcus T.</p><p>Founder, Northstar Audio</p></div></div></div>
+      <div class="testi-card" aria-hidden="true"><p class="testi-quote">"Dim-weight savings alone paid for the redesign inside one quarter."</p><div class="testi-person"><div class="testi-avatar"><img src="./Assets/testi-3.webp" alt=""></div><div><p>Priya K.</p><p>Supply Chain, Fernway Coffee</p></div></div></div>
+      <div class="testi-card" aria-hidden="true"><p class="testi-quote">"Our fragile SKUs stopped coming back broken the month we switched inserts."</p><div class="testi-person"><div class="testi-avatar"><img src="./Assets/testi-4.webp" alt=""></div><div><p>Daniel W.</p><p>Owner, Hollow Creek Cellars</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PRICING ======================= -->
+<section class="section-white" id="pricing">
+  <div class="wrap px">
+    <div class="badge-row"><span class="badge-pill gray-300">Getting started</span></div>
+    <h2 class="section-heading tight">Start with a sample, <em>scale when it fits.</em></h2>
+
+    <div class="pricing-grid" style="margin-top:40px;">
+      <div class="price-card">
+        <h3>Sample Kit</h3>
+        <div class="price">$0 <small>+ shipping</small></div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>5 stock box styles</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>Kraft &amp; white board swatches</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>Ships in 2 business days</li>
+        </ul>
+        <button class="btn-flat" onclick="window.location.href='samples.html';">Order sample kit</button>
+      </div>
+      <div class="price-card featured">
+        <span class="price-badge">Most requested</span>
+        <h3>Custom Prototype</h3>
+        <div class="price">$149</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>Structure built to your dimensions</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>Print-accurate proof</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>Credited toward first order</li>
+        </ul>
+        <button class="btn-flat" onclick="window.location.href='quote.html';">Start a prototype</button>
+      </div>
+      <div class="price-card">
+        <h3>Production Run</h3>
+        <div class="price">Custom</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>250 to 500,000+ units</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>Dedicated account manager</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>Freight &amp; reorder scheduling</li>
+        </ul>
+        <button class="btn-flat" onclick="window.location.href='quote.html';">Get a production quote</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= FAQ ======================= -->
+<section class="section-cream flute-bg" id="faq">
+  <div class="wrap px">
+    <div class="badge-row"><span class="badge-pill">Questions</span></div>
+    <h2 class="section-heading tight">Before you send us your dimensions.</h2>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question">What's your minimum order quantity?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        <div class="faq-answer"><p>Digital short runs start at 250 units. Flexo and litho runs typically start around 2,500 units, with pricing improving at volume.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">How long does a prototype take?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        <div class="faq-answer"><p>Structural white samples ship within 48 hours. Print-accurate proofs typically take 5 to 7 business days once art is finalized.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Can you match an existing box we already use?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        <div class="faq-answer"><p>Yes. Send us a physical sample or spec sheet and our structural team will match board grade, flute, and dimensions.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Is all your board actually recyclable?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        <div class="faq-answer"><p>Every stock we run is curbside recyclable, free of plastic laminate, and printed with soy-based inks by default.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= FINAL CTA ======================= -->
+<section class="section-white" style="padding-top:0;" id="contact">
+  <div class="wrap px">
+    <div class="cta-banner">
+      <h2>Tell us what you're shipping. We'll tell you what it should ship in.</h2>
+      <p>Get a structural recommendation and sample kit within 48 hours — no minimum to ask.</p>
+      <button class="roll-btn orange big" onclick="window.location.href='quote.html';">
+        <span class="roll-text"><span class="roll-text-inner">
+          <span>Talk to our team</span>
+          <span>Talk to our team</span>
+        </span></span>
+        <span class="roll-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="19" x2="19" y2="5"/><polyline points="9 5 19 5 19 15"/></svg></span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= FOOTER ======================= -->
+<footer class="site-footer">
+  <div class="wrap px">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo-slot" aria-label="Homepage">
+          <img src="./Assets/logo.webp" alt="Pulp & Press logo" class="footer-logo-img">
+        </a>
+        <p>Pulp &amp; Press designs, prints, and manufactures corrugated, kraft, and custom retail packaging from six facilities across North America.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#work">Work</a></li>
+          <li><a href="quote.html">Get a quote</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-services">
+        <h4>Products</h4>
+        <ul>
+          <li><a href="#products">Corrugated boxes</a></li>
+          <li><a href="#products">Kraft mailers &amp; bags</a></li>
+          <li><a href="#products">Custom retail boxes</a></li>
+          <li><a href="#products">Protective inserts</a></li>
+          <li><a href="#products">Print &amp; finishing</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-contact">
+        <h4>Reach Us</h4>
+        <div class="footer-address">
+          Nagole, Hyderabad<br>
+          <a href="mailto:hello@pulpandpress.com">hello@pulpandpress.com</a><br>
+          <a href="tel:+919879876751">+91 9879876751</a>
+        </div>
+        <div class="footer-social">
+          <a href="404.html" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+          </a>
+          <a href="404.html" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><line x1="7.5" y1="10" x2="7.5" y2="17"/><circle cx="7.5" cy="7" r="1"/><path d="M11.5 17v-4.5a2.5 2.5 0 0 1 5 0V17"/></svg>
+          </a>
+          <a href="404.html" aria-label="Pinterest">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9.5 17c1-3 1.5-5 1.5-6.5a2.5 2.5 0 015 0c0 2-1 4-3 4"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Pulp &amp; Press. All rights reserved.</span>
+      <span class="footer-disclosure">All board stock is FSC / SFI certified. Lead times vary by run size and finishing options — confirmed at quote.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="./script.js"></script>
+</body>
+</html>

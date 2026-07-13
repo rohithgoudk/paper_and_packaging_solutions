@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Not Found — Pulp &amp; Press</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:        #1C1712;
+  --ink-soft:   #2A2119;
+  --ink-70:     rgba(28,23,18,.68);
+  --ink-45:     rgba(28,23,18,.45);
+  --paper:      #F6F1E7;
+  --paper-dim:  #EDE3CE;
+  --white:      #FFFFFF;
+  --kraft:      #B9895A;
+  --kraft-deep: #8C6239;
+  --kraft-light:#E8D2AC;
+  --forest:     #45573A;
+  --stamp:      #A63A2E;
+  --stamp-pale: #F5E2DC;
+  --line:       rgba(28,23,18,.14);
+  --line-soft:  rgba(28,23,18,.08);
+  --radius-xl:26px;
+  --radius-lg:18px;
+  --radius-md:14px;
+  --radius-pill:999px;
+  --shadow-sm:0 6px 18px -8px rgba(28,23,18,.16);
+  --shadow-md:0 18px 40px -14px rgba(28,23,18,.22);
+  --shadow-lg:0 40px 80px -24px rgba(28,23,18,.3);
+  --shadow-stamp:0 16px 34px -12px rgba(166,58,46,.35);
+  --display:'Anton','Arial Narrow',sans-serif;
+  --mono:'Space Mono',monospace;
+  --body:'Inter',sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --dur-fast:.22s;
+  --dur:.4s;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; }
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  position:relative;
+  overflow-x:hidden;
+}
+a{ color:inherit; text-decoration:none; }
+button{ font-family:inherit; cursor:pointer; background:none; border:none; color:inherit; }
+::selection{ background:var(--stamp); color:var(--paper); }
+:focus-visible{ outline:2px solid var(--stamp); outline-offset:3px; border-radius:4px; }
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+  }
+}
+
+/* corrugated flute texture, ambient */
+body::before{
+  content:"";
+  position:fixed; inset:0;
+  background-image:repeating-linear-gradient(180deg, rgba(28,23,18,.035) 0px, rgba(28,23,18,.035) 1px, transparent 1px, transparent 9px);
+  z-index:0;
+  pointer-events:none;
+}
+body::after{
+  content:"";
+  position:fixed; inset:0;
+  background:radial-gradient(55% 42% at 50% 0%, var(--kraft-light) 0%, transparent 72%);
+  opacity:.55;
+  z-index:0;
+  pointer-events:none;
+}
+
+/* ===== top nav buttons ===== */
+.error-nav-btns{
+  position:fixed; top:28px; left:28px; z-index:20;
+  display:flex; align-items:center; gap:10px;
+}
+.error-back-btn{
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--white);
+  border:1px solid var(--line);
+  color:var(--ink-70);
+  font-family:var(--mono);
+  font-size:12.5px; font-weight:700; letter-spacing:.03em; text-transform:uppercase;
+  padding:10px 20px 10px 14px;
+  border-radius:var(--radius-pill);
+  box-shadow:var(--shadow-sm);
+  transition:color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+}
+.error-back-btn:hover{
+  color:var(--stamp);
+  border-color:var(--stamp);
+  transform:translateY(-2px);
+  box-shadow:var(--shadow-md);
+}
+.error-back-btn svg{ flex-shrink:0; }
+.error-back-btn.home-btn{ background:var(--ink); color:var(--paper); border-color:var(--ink); }
+.error-back-btn.home-btn:hover{ color:var(--paper); background:var(--stamp); border-color:var(--stamp); box-shadow:var(--shadow-stamp); }
+
+@media (max-width:1023px){
+  .error-nav-btns{ top:16px; left:16px; }
+  .error-back-btn{ font-size:11px; padding:7px 14px 7px 10px; }
+  .error-back-btn svg{ width:15px; height:15px; }
+}
+
+/* ===== layout root ===== */
+.error-root{
+  position:relative; z-index:1;
+  width:100%; max-width:1160px;
+  display:flex; align-items:center; justify-content:center; gap:56px;
+}
+@media (max-width:1023px){ .error-root{ padding-top:44px; flex-direction:column; } }
+
+/* ===== card ===== */
+.error-card{ width:100%; max-width:480px; flex-shrink:0; }
+.error-card-inner{
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:var(--radius-xl);
+  padding:52px 44px 44px;
+  box-shadow:var(--shadow-lg);
+  text-align:left;
+  position:relative;
+  overflow:hidden;
+}
+@media (max-width:480px){ .error-card-inner{ padding:36px 24px 30px; border-radius:var(--radius-lg); } }
+
+.badge-pill{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:7px 16px;
+  border:1px solid var(--line);
+  border-radius:var(--radius-pill);
+  font-family:var(--mono);
+  font-size:11.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--stamp);
+  background:var(--stamp-pale);
+  margin-bottom:26px;
+}
+.badge-pill::before{ content:""; width:6px; height:6px; border-radius:50%; background:var(--stamp); flex-shrink:0; }
+
+/* ink stamp, rotated like a "misrouted" package stamp */
+.error-stamp{
+  position:absolute;
+  top:34px; right:-14px;
+  width:104px; height:104px;
+  border-radius:50%;
+  border:2.5px solid var(--stamp);
+  color:var(--stamp);
+  display:flex; align-items:center; justify-content:center; text-align:center;
+  font-family:var(--mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase; line-height:1.35;
+  transform:rotate(11deg);
+  opacity:.9;
+  padding:8px;
+}
+@media (max-width:480px){ .error-stamp{ display:none; } }
+
+.error-code{
+  font-family:var(--display);
+  text-transform:uppercase;
+  font-size:clamp(46px, 7vw, 68px);
+  line-height:.96;
+  color:var(--ink);
+  letter-spacing:.005em;
+  margin:0 0 18px;
+}
+.error-code em{ font-style:normal; color:var(--stamp); }
+
+.error-title{
+  font-family:var(--display);
+  text-transform:uppercase;
+  font-size:20px;
+  letter-spacing:.005em;
+  line-height:1.25;
+  color:var(--ink);
+  margin:0 0 12px;
+}
+
+.error-subtitle{
+  font-size:15px;
+  color:var(--ink-70);
+  line-height:1.7;
+  margin:0 0 32px;
+  max-width:400px;
+}
+
+/* quick links, echoing the product-card treatment */
+.error-links{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin:0 0 32px;
+}
+@media (max-width:420px){ .error-links{ grid-template-columns:1fr; } }
+.error-link-item{
+  display:flex; align-items:flex-start; gap:12px;
+  padding:16px;
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:var(--radius-md);
+  transition:border-color var(--dur) var(--ease), transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), background var(--dur) var(--ease);
+  color:var(--ink);
+}
+.error-link-item:hover{
+  border-color:transparent;
+  background:var(--white);
+  transform:translateY(-4px);
+  box-shadow:var(--shadow-md);
+}
+.error-link-icon{
+  width:32px; height:32px; border-radius:50%;
+  display:inline-flex; align-items:center; justify-content:center;
+  background:var(--stamp-pale); color:var(--stamp);
+  flex-shrink:0;
+}
+.error-link-icon svg{ width:15px; height:15px; }
+.error-link-text{ display:flex; flex-direction:column; gap:2px; }
+.error-link-text strong{ font-family:var(--mono); font-size:12.5px; font-weight:700; letter-spacing:.02em; text-transform:uppercase; }
+.error-link-text small{ font-size:12px; color:var(--ink-45); font-weight:500; }
+
+/* buttons — reusing the theme's roll-btn */
+.error-actions{ display:flex; flex-direction:column; gap:12px; }
+.roll-btn{
+  position:relative;
+  display:inline-flex; align-items:center; justify-content:center; gap:12px;
+  padding:16px 26px;
+  border-radius:var(--radius-pill);
+  font-family:var(--mono);
+  font-size:13px; font-weight:700; letter-spacing:.05em; text-transform:uppercase;
+  overflow:hidden; isolation:isolate;
+  transition:transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+}
+.roll-btn::before{
+  content:""; position:absolute; inset:0;
+  background:var(--ink);
+  transform:translateY(102%);
+  transition:transform var(--dur) var(--ease);
+  z-index:0;
+}
+.roll-btn.dark::before{ background:var(--stamp); }
+.roll-btn:hover::before{ transform:translateY(0); }
+.roll-btn:hover{ transform:translateY(-2px); box-shadow:var(--shadow-stamp); }
+.roll-btn.dark:hover{ box-shadow:var(--shadow-md); }
+.roll-btn:active{ transform:translateY(0) scale(.98); }
+.roll-btn.orange{ background:var(--stamp); color:var(--paper); }
+.roll-btn.dark{ background:var(--ink); color:var(--paper); }
+.roll-text{ position:relative; z-index:1; }
+.roll-arrow{
+  position:relative; z-index:1;
+  display:inline-flex; align-items:center; justify-content:center;
+  width:17px; height:17px;
+  transition:transform var(--dur-fast) var(--ease);
+}
+.roll-arrow svg{ width:100%; height:100%; }
+.roll-btn:hover .roll-arrow{ transform:translate(3px,-3px); }
+
+.error-btn-secondary{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:15px 26px;
+  border-radius:var(--radius-pill);
+  border:1.5px solid var(--ink);
+  background:transparent;
+  color:var(--ink);
+  font-family:var(--mono);
+  font-weight:700; font-size:12.5px; letter-spacing:.05em; text-transform:uppercase;
+  transition:background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+}
+.error-btn-secondary:hover{ background:var(--ink); color:var(--paper); transform:translateY(-2px); }
+
+.error-badge-status{
+  display:inline-flex; align-items:center; gap:8px;
+  margin-top:26px;
+  font-family:var(--mono);
+  font-size:11px; letter-spacing:.03em; text-transform:uppercase;
+  color:var(--ink-45); font-weight:600;
+}
+.error-badge-status::before{
+  content:""; width:7px; height:7px; border-radius:50%;
+  background:var(--forest); flex-shrink:0;
+  box-shadow:0 0 0 3px rgba(69,87,58,.15);
+}
+
+/* ===== decorative side panel ===== */
+.error-decoration{ display:none; }
+@media (min-width:1024px){
+  .error-decoration{ display:flex; flex:1; max-width:440px; }
+  .error-decoration-inner{
+    background:var(--ink);
+    border-radius:var(--radius-xl);
+    padding:52px 40px;
+    width:100%;
+    display:flex; flex-direction:column; justify-content:center;
+    position:relative; overflow:hidden;
+    box-shadow:var(--shadow-lg);
+  }
+  .error-decoration-inner::before{
+    content:"";
+    position:absolute; inset:0;
+    background:radial-gradient(60% 100% at 50% 0%, rgba(185,137,90,.32), transparent 70%);
+  }
+  .error-decoration-inner::after{
+    content:"";
+    position:absolute; inset:0;
+    background-image:repeating-linear-gradient(180deg, rgba(246,241,231,.045) 0px, rgba(246,241,231,.045) 1px, transparent 1px, transparent 10px);
+  }
+  .error-decoration-inner > *{ position:relative; z-index:1; }
+
+  .error-decoration-eyebrow{
+    font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--kraft-light); margin-bottom:14px; display:flex; align-items:center; gap:8px;
+  }
+  .error-decoration-eyebrow::before{ content:""; width:6px; height:6px; border-radius:50%; background:var(--stamp); }
+
+  .error-decoration h2{
+    font-family:var(--display); text-transform:uppercase;
+    font-size:28px; letter-spacing:.005em;
+    color:var(--paper); margin:0 0 14px; line-height:1.08;
+  }
+  .error-decoration h2 em{ font-style:normal; color:var(--kraft-light); }
+  .error-decoration p{ font-size:14px; line-height:1.7; color:rgba(246,241,231,.65); margin:0 0 32px; max-width:300px; }
+
+  .error-decoration-stats{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:32px; }
+  .error-decoration-stat{
+    background:rgba(246,241,231,.06);
+    border:1px solid rgba(246,241,231,.12);
+    padding:18px 16px; border-radius:var(--radius-md);
+  }
+  .error-decoration-stat .number{ font-family:var(--display); font-size:24px; color:var(--kraft-light); display:block; margin-bottom:4px; letter-spacing:.01em; }
+  .error-decoration-stat .label{ font-family:var(--mono); font-size:10.5px; color:rgba(246,241,231,.55); font-weight:600; letter-spacing:.03em; text-transform:uppercase; }
+
+  /* mini box art, echoes hero box */
+  .decoration-box{ display:flex; justify-content:center; align-items:center; }
+  .decoration-box svg{ width:120px; height:120px; opacity:.9; }
+}
+
+.error-decoration-mobile{ display:none; }
+@media (max-width:1023px){
+  .error-decoration-mobile{
+    display:flex; align-items:center; gap:10px;
+    margin-top:28px; padding:14px 18px;
+    background:var(--ink); color:var(--paper);
+    border-radius:var(--radius-md);
+    font-family:var(--mono); font-size:11.5px; letter-spacing:.03em;
+  }
+  .error-decoration-mobile strong{ color:var(--kraft-light); font-family:var(--display); font-size:15px; letter-spacing:.01em; margin-right:4px; }
+}
+</style>
+</head>
+<body>
+
+<div class="error-nav-btns">
+  <button class="error-back-btn" id="back-btn">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M19 12H5" />
+      <path d="M12 19l-7-7 7-7" />
+    </svg>
+    Back
+  </button>
+
+  <a href="index.html" class="error-back-btn home-btn" id="home-btn">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 11l9-8 9 8" />
+      <path d="M5 10v10h14V10" />
+    </svg>
+    Back to home
+  </a>
+</div>
+
+<div class="error-root">
+
+  <div class="error-card">
+    <div class="error-card-inner">
+
+      <div class="error-stamp">Return<br>to&nbsp;sender</div>
+
+      <span class="badge-pill">Error 404</span>
+
+      <h1 class="error-code">Lost<br>in <em>transit.</em></h1>
+
+      <h2 class="error-title">This page never made it to the dock</h2>
+      <p class="error-subtitle">The link may have moved, been relabeled, or the box just went to the wrong facility. Here are a few places worth checking instead.</p>
+
+      <div class="error-links">
+        <a href="index.html#products" class="error-link-item">
+          <span class="error-link-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l9-5 9 5-9 5-9-5z"/><path d="M3 8v8l9 5 9-5V8"/></svg>
+          </span>
+          <span class="error-link-text">
+            <strong>Products</strong>
+            <small>See what we make</small>
+          </span>
+        </a>
+        <a href="index.html#process" class="error-link-item">
+          <span class="error-link-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </span>
+          <span class="error-link-text">
+            <strong>Process</strong>
+            <small>Design to delivery</small>
+          </span>
+        </a>
+        <a href="index.html#work" class="error-link-item">
+          <span class="error-link-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          </span>
+          <span class="error-link-text">
+            <strong>Our work</strong>
+            <small>Boxes we've shipped</small>
+          </span>
+        </a>
+        <a href="quote.html" class="error-link-item">
+          <span class="error-link-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16v13H4z"/><path d="M4 7l3-4h10l3 4"/></svg>
+          </span>
+          <span class="error-link-text">
+            <strong>Get a quote</strong>
+            <small>Start a project</small>
+          </span>
+        </a>
+      </div>
+
+      <div class="error-actions">
+        <a href="index.html" class="roll-btn orange">
+          <span class="roll-text">Return to homepage</span>
+          <span class="roll-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          </span>
+        </a>
+      </div>
+
+      <div class="error-badge-status">Order tracking: all systems operational</div>
+
+      <div class="error-decoration-mobile"><strong>Paper&nbsp;&amp;&nbsp;Press</strong> — 1,400+ brands packaged, 6 facilities.</div>
+
+    </div>
+  </div>
+
+  <div class="error-decoration">
+    <div class="error-decoration-inner">
+      <div class="error-decoration-eyebrow">Misrouted, not missing</div>
+      <h2>Wrong <em>dock.</em><br>Right company.</h2>
+      <p>Even the best freight takes a wrong turn sometimes. A few numbers to get you back on track.</p>
+      <div class="error-decoration-stats">
+        <div class="error-decoration-stat"><span class="number">1,400+</span><span class="label">Brands packaged</span></div>
+        <div class="error-decoration-stat"><span class="number">6</span><span class="label">Facilities</span></div>
+        <div class="error-decoration-stat"><span class="number">92%</span><span class="label">Recycled fibre</span></div>
+        <div class="error-decoration-stat"><span class="number">38</span><span class="label">Countries shipped</span></div>
+      </div>
+      <div class="decoration-box">
+        <svg viewBox="0 0 120 120" fill="none">
+          <rect x="18" y="42" width="84" height="60" rx="2" fill="#B9895A" stroke="#F6F1E7" stroke-width="2"/>
+          <path d="M18 42L60 22L102 42" stroke="#F6F1E7" stroke-width="2" stroke-linejoin="round" fill="#E8D2AC"/>
+          <path d="M18 42L60 62L102 42" stroke="#F6F1E7" stroke-width="2" stroke-linejoin="round" fill="none"/>
+          <path d="M60 62V102" stroke="#F6F1E7" stroke-width="1.4" stroke-dasharray="3 3"/>
+          <circle cx="60" cy="82" r="16" fill="none" stroke="#A63A2E" stroke-width="2"/>
+          <text x="60" y="86" text-anchor="middle" font-family="Space Mono, monospace" font-size="9" fill="#A63A2E">404</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  document.getElementById('back-btn').addEventListener('click', function () {
+    if (window.history.length > 1) {
+      window.history.back();
+    } else {
+      window.location.href = 'index.html';
+    }
+  });
+</script>
+
+</body>
+</html>
