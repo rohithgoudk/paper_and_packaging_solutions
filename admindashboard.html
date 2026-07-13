@@ -403,7 +403,7 @@
         <div class="sidebar-user-email" id="sidebarUserEmail">—</div>
       </div>
     </div>
-    <button class="logout-full-btn" id="sidebarLogoutBtn"> Logout</button>
+    <button class="logout-full-btn" id="sidebarLogoutBtn">Logout</button>
   </aside>
 
   <main class="main-content" id="mainContent">
@@ -622,13 +622,13 @@ function fmt(n) { return "$" + n.toLocaleString(); }
 function esc(s) { return String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
 
 const pageMap = {
-  dashboard: { title: "Dashboard", sub: "Network overview.", render: renderDashboardPage },
-  distributors: { title: "Partner Accounts", sub: "Manage all registered client accounts and tiers.", render: renderDistributorsPage },
-  teams: { title: "Facility Teams", sub: "All active and established production crews.", render: renderTeamsPage },
-  products: { title: "Products", sub: "Catalog of all Pulp & Press product lines.", render: renderProductsPage },
-  commissions: { title: "Budget", sub: "Materials allocation and spend tracking.", render: renderCommissionsPage },
-  approvals: { title: "Approvals", sub: "Review and manage pending requests.", render: renderApprovalsPage },
-  settings: { title: "Settings", sub: "Account preferences and configuration.", render: renderSettingsPage },
+  dashboard: { title: "Dashboard", sub: "", render: renderDashboardPage },
+  distributors: { title: "Partner Accounts", sub: "", render: renderDistributorsPage },
+  teams: { title: "Facility Teams", sub: "", render: renderTeamsPage },
+  products: { title: "Products", sub: "", render: renderProductsPage },
+  commissions: { title: "Budget", sub: "", render: renderCommissionsPage },
+  approvals: { title: "Approvals", sub: "", render: renderApprovalsPage },
+  settings: { title: "Settings", sub: "", render: renderSettingsPage },
 };
 
 // ─────────────────────────────────────────────────────────────
