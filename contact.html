@@ -281,6 +281,7 @@
     width:100%;
   }
   @media (min-width:960px){ .hero-inner{ grid-template-columns:1.1fr 0.9fr; gap:32px; } }
+  .hero-inner > *{ min-width:0; }
   
   .hero-eyebrow{ color:var(--kraft-light); display:flex; align-items:center; gap:10px; }
   .hero-eyebrow .dot{ width:6px; height:6px; border-radius:50%; background:var(--stamp); display:inline-block; }
@@ -310,38 +311,37 @@
   /* box unfold art */
   .box-stage{
     position:relative;
-    width:100%; max-width:420px; margin:0 auto;
+    width:100%; max-width:300px; margin:0 auto;
     aspect-ratio:1/1;
-    perspective:1400px;
+    perspective:900px;
   }
   .box-art{ position:relative; width:100%; height:100%; transform-style:preserve-3d; }
   .flap{
-    position:absolute; left:50%; top:50%;
-    width:62%; height:62%;
-    margin:-31% 0 0 -31%;
+    position:absolute;
+    width:50%; height:50%;
     background:var(--kraft);
     border:2px solid rgba(28,23,18,0.35);
-    transform-origin:bottom center;
+    backface-visibility:visible;
     animation:flapOpen 1.6s var(--ease) both;
   }
-  .flap.top{ background:var(--kraft-light); transform-origin:bottom center; animation-delay:0.05s; }
-  .flap.bottom{ background:var(--kraft-deep); transform-origin:top center; top:auto; bottom:50%; margin:0 0 0 -31%; animation-name:flapOpenBottom; animation-delay:0.15s; }
-  .flap.left{ background:var(--kraft); transform-origin:right center; animation-name:flapOpenLeft; animation-delay:0.1s; }
-  .flap.right{ background:var(--kraft-deep); transform-origin:left center; animation-name:flapOpenRight; animation-delay:0.2s; }
+  .flap.left{ top:25%; left:auto; right:75%; background:var(--kraft); transform-origin:right center; animation-name:flapOpenLeft; animation-delay:0.1s; z-index:1; }
+  .flap.right{ top:25%; left:75%; background:var(--kraft-deep); transform-origin:left center; animation-name:flapOpenRight; animation-delay:0.2s; z-index:2; }
+  .flap.bottom{ top:75%; left:25%; background:var(--kraft-deep); transform-origin:top center; animation-name:flapOpenBottom; animation-delay:0.15s; z-index:3; }
+  .flap.top{ top:auto; bottom:75%; left:25%; background:var(--kraft-light); transform-origin:bottom center; animation-delay:0.05s; z-index:4; }
   .box-base{
-    position:absolute; left:50%; top:50%; width:58%; height:58%;
-    margin:-29% 0 0 -29%;
+    position:absolute; left:50%; top:50%; width:50%; height:50%;
+    margin:-25% 0 0 -25%;
     background:var(--paper-dim);
     border:2px solid rgba(28,23,18,0.35);
     display:flex; align-items:center; justify-content:center;
     z-index:-1;
   }
-  .box-base .stamp-mark{ font-family:var(--mono); font-size:11px; color:var(--stamp); text-align:center; letter-spacing:0.08em; text-transform:uppercase; transform:rotate(-8deg); border:1.5px solid var(--stamp); padding:8px 12px; border-radius:6px; opacity:0.85; }
+  .box-base .stamp-mark{ font-family:var(--mono); font-size:10px; color:var(--stamp); text-align:center; letter-spacing:0.08em; text-transform:uppercase; transform:rotate(-8deg); border:1.5px solid var(--stamp); padding:6px 10px; border-radius:6px; opacity:0.85; }
   
-  @keyframes flapOpen{ 0%{ transform:rotateX(0deg); } 100%{ transform:rotateX(-125deg); } }
-  @keyframes flapOpenBottom{ 0%{ transform:rotateX(0deg); } 100%{ transform:rotateX(125deg); } }
-  @keyframes flapOpenLeft{ 0%{ transform:rotateY(0deg); } 100%{ transform:rotateY(125deg); } }
-  @keyframes flapOpenRight{ 0%{ transform:rotateY(0deg); } 100%{ transform:rotateY(-125deg); } }
+  @keyframes flapOpen{ 0%{ transform:rotateX(0deg); } 100%{ transform:rotateX(-98deg); } }
+  @keyframes flapOpenBottom{ 0%{ transform:rotateX(0deg); } 100%{ transform:rotateX(98deg); } }
+  @keyframes flapOpenLeft{ 0%{ transform:rotateY(0deg); } 100%{ transform:rotateY(98deg); } }
+  @keyframes flapOpenRight{ 0%{ transform:rotateY(0deg); } 100%{ transform:rotateY(-98deg); } }
   
   .scroll-cue{
     position:absolute; bottom:28px; left:50%; transform:translateX(-50%);
@@ -673,7 +673,7 @@
     </nav>
 
     <div class="header-right">
-      <button class="roll-btn ghost header-login-btn" onclick="window.location.href='login.html';">
+      <button class="roll-btn ghost header-login-btn" onclick="window.location.href='404.html';">
         <span>Login</span>
       </button>
     </div>
@@ -1002,5 +1002,4 @@
 </footer>
 
 <script src="./script.js"></script>
-</body>
-</html>
+</body>404
