@@ -157,8 +157,8 @@ body::after{
 @keyframes shimmer{ to{ background-position:-200% 0; } }
 @media (max-width:480px){ .auth-card-inner{ padding:34px 24px 28px; border-radius:var(--radius-lg); } }
 
-.auth-logo{ display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:26px; }
-.auth-logo svg{ width:32px; height:32px; }
+.auth-logo{ display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:26px; width:100%; }
+.auth-logo img{ width:auto; height:auto; max-width:65%; object-fit:contain; display:block; }
 .auth-logo span{ font-family:var(--display); font-size:20px; letter-spacing:.01em; text-transform:uppercase; }
 .auth-logo span em{ font-style:normal; color:var(--stamp); }
 
@@ -415,8 +415,7 @@ body::after{
     <div class="auth-card-inner">
 
       <div class="auth-logo">
-        <svg viewBox="0 0 32 32" fill="none"><rect x="4" y="12" width="24" height="16" rx="1.5" fill="#B9895A" stroke="#1C1712" stroke-width="1.4"/><path d="M4 12L16 5L28 12" stroke="#1C1712" stroke-width="1.4" stroke-linejoin="round" fill="#E8D2AC"/><path d="M16 5V17" stroke="#1C1712" stroke-width="1" stroke-dasharray="2 2"/></svg>
-        <span>Paper&nbsp;<em>&amp;</em>&nbsp;Press</span>
+        <img src="./Assets/Stacklyimg4.webp" alt="Paper & Press logo">
       </div>
 
       <div style="text-align:center;">
