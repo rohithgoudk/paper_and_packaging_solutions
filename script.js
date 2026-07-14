@@ -13,30 +13,68 @@ document.addEventListener('DOMContentLoaded', () => {
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
   
-    /* ---------- Mobile menu ---------- */
+    /* ---------- Mobile menu - FIXED ---------- */
     const menuToggle = document.getElementById('menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
     const menuBackdrop = document.getElementById('menu-backdrop');
   
-    const openMenu = () => {
-      mobileMenu.classList.add('open');
-      menuToggle.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    };
-    const closeMenu = () => {
-      mobileMenu.classList.remove('open');
-      menuToggle.classList.remove('active');
-      document.body.style.overflow = '';
-    };
-  
     if (menuToggle && mobileMenu) {
-      menuToggle.addEventListener('click', () => {
-        mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
+      // Open menu function
+      const openMenu = () => {
+        mobileMenu.classList.add('open');
+        menuToggle.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.width = '100%';
+        document.body.style.top = `-${window.scrollY}px`;
+      };
+      
+      // Close menu function
+      const closeMenu = () => {
+        const scrollY = document.body.style.top;
+        mobileMenu.classList.remove('open');
+        menuToggle.classList.remove('active');
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
+        document.body.style.top = '';
+        if (scrollY) {
+          window.scrollTo(0, parseInt(scrollY || '0') * -1);
+        }
+      };
+  
+      // Toggle menu on hamburger click
+      menuToggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (mobileMenu.classList.contains('open')) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
       });
-      menuBackdrop.addEventListener('click', closeMenu);
+  
+      // Close menu on backdrop click
+      if (menuBackdrop) {
+        menuBackdrop.addEventListener('click', closeMenu);
+      }
+  
+      // Close menu on any link click inside mobile menu
       mobileMenu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', closeMenu);
       });
+  
+      // Close menu on escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+          closeMenu();
+        }
+      });
+  
+      // Debug
+      console.log('Mobile menu initialized');
+      console.log('Menu toggle:', menuToggle);
+      console.log('Mobile menu:', mobileMenu);
     }
   
     /* ---------- FAQ accordion ---------- */
@@ -77,4 +115,4 @@ document.addEventListener('DOMContentLoaded', () => {
       track.addEventListener('touchend', () => track.style.animationPlayState = 'running', { passive: true });
     }
   
-  });
+});
