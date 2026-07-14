@@ -183,7 +183,7 @@ a:focus-visible, button:focus-visible, .faq-question:focus-visible {
 .header-login-btn { padding:12px 22px; font-size:12.5px; }
 .header-login-btn:hover { background:var(--ink); color:var(--paper); }
 
-.mobile-sheet-actions { display:flex; flex-direction:column; gap:12px; align-self:flex-start; width:100%; }
+.mobile-sheet-actions { display:flex; flex-direction:column; gap:12px; align-self:center; width:100%; }
 .mobile-sheet-actions .roll-btn { width:100%; justify-content:center; }
 .mobile-sheet-actions .roll-btn:nth-child(2) { transition-delay:0.52s; }
 
@@ -208,14 +208,14 @@ a:focus-visible, button:focus-visible, .faq-question:focus-visible {
 }
 .mobile-sheet {
   position:absolute; top:0; right:0; bottom:0;
-  width:85%; max-width:340px;
+  width:100%; max-width:none;
   height:100vh; height:100dvh;
   background-color:var(--paper);
   color:var(--ink);
   box-shadow:-12px 0 40px rgba(28,23,18,0.25);
   transform:translateX(100%);
   transition:transform 0.5s var(--ease);
-  display:flex; flex-direction:column; justify-content:space-between;
+  display:flex; flex-direction:column; justify-content:space-between; align-items:center;
   padding:100px 32px 40px;
   overflow-y:auto;
 }
@@ -223,7 +223,7 @@ a:focus-visible, button:focus-visible, .faq-question:focus-visible {
 .mobile-menu.open .mobile-menu-backdrop { opacity:1; }
 .mobile-menu.open .mobile-sheet { transform:translateX(0); }
 
-.mobile-nav-links { display:flex; flex-direction:column; gap:22px; }
+.mobile-nav-links { display:flex; flex-direction:column; align-items:center; gap:22px; text-align:center; }
 .mobile-nav-links a {
   font-family:var(--display); font-size:28px; letter-spacing:0.01em;
   color:var(--ink);
@@ -242,13 +242,15 @@ a:focus-visible, button:focus-visible, .faq-question:focus-visible {
 .mobile-sheet .roll-btn {
   opacity:0; transform:translateY(14px);
   transition:opacity 0.5s var(--ease) 0.45s, transform 0.5s var(--ease) 0.45s, background 0.3s var(--ease), color 0.3s var(--ease);
-  align-self:flex-start;
+  align-self:center;
 }
 .mobile-menu.open .mobile-sheet .roll-btn { opacity:1; transform:translateY(0); }
 .mobile-sheet .roll-btn.ghost { color:var(--ink); border-color:var(--line); }
 .mobile-sheet .roll-btn.ghost:hover { background:var(--ink); color:var(--paper); }
 
-/* hamburger animation */
+/* hamburger animation — doubles as the "X" close mark. It lives in the
+   header, which sits above the mobile sheet (z-index 310 vs 300), so it
+   stays visible and tappable in the top-right corner even at full width. */
 .hamburger { position:relative; width:20px; height:14px; pointer-events:none; }
 .hamburger span {
   position:absolute; left:0; width:100%; height:2px; background:currentColor;
@@ -622,11 +624,7 @@ a:focus-visible, button:focus-visible, .faq-question:focus-visible {
           <span>Order a sample kit</span>
         </button>
       </div>
-      <div class="hero-meta">
-        <div><strong>1,400+</strong>brands packaged</div>
-        <div><strong>40%</strong>avg. damage reduction*</div>
-        <div><strong>18%</strong>avg. dim-weight savings*</div>
-      </div>
+      
     </div>
     <div class="box-stage" aria-hidden="true">
       <div class="box-art">
@@ -638,7 +636,7 @@ a:focus-visible, button:focus-visible, .faq-question:focus-visible {
       </div>
     </div>
   </div>
-  <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
+ 
 </section>
 
 <div class="torn" aria-hidden="true">

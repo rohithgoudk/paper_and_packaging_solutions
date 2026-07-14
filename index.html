@@ -211,7 +211,7 @@
     }
     .mobile-sheet {
       position:absolute; top:0; right:0; bottom:0;
-      width:85%; max-width:340px;
+      width:100%; max-width:none;
       height:100vh; height:100dvh;
       background-color:var(--paper);
       color:var(--ink);
@@ -219,7 +219,7 @@
       box-shadow:-12px 0 40px rgba(28,23,18,0.25);
       transform:translateX(100%);
       transition:transform 0.5s var(--ease);
-      display:flex; flex-direction:column; justify-content:space-between;
+      display:flex; flex-direction:column; justify-content:space-between; align-items:center;
       padding:100px 32px 40px;
       overflow-y:auto;
     }
@@ -227,7 +227,7 @@
     .mobile-menu.open .mobile-menu-backdrop { opacity:1; }
     .mobile-menu.open .mobile-sheet { transform:translateX(0); }
 
-    .mobile-nav-links { display:flex; flex-direction:column; gap:22px; }
+    .mobile-nav-links { display:flex; flex-direction:column; align-items:center; gap:22px; text-align:center; }
     .mobile-nav-links a {
       font-family:var(--display); font-size:28px; letter-spacing:0.01em;
       color:var(--ink);
@@ -245,7 +245,7 @@
     .mobile-sheet .roll-btn {
       opacity:0; transform:translateY(14px);
       transition:opacity 0.5s var(--ease) 0.45s, transform 0.5s var(--ease) 0.45s, background 0.3s var(--ease), color 0.3s var(--ease);
-      align-self:flex-start;
+      align-self:center;
     }
     .mobile-menu.open .mobile-sheet .roll-btn { opacity:1; transform:translateY(0); }
     .mobile-sheet .roll-btn.ghost { color:var(--ink); border-color:var(--line); }
@@ -896,7 +896,7 @@
         <div class="stats-grid" style="margin-top:32px; grid-template-columns:repeat(3,1fr);">
           <div><div class="stat-number" style="color:var(--forest);">92%</div><div class="stat-label" style="color:var(--ink-soft);">Recycled fibre</div></div>
           <div><div class="stat-number" style="color:var(--forest);">100%</div><div class="stat-label" style="color:var(--ink-soft);">Curbside recyclable</div></div>
-          <div><div class="stat-number" style="color:var(--forest);">0</div><div class="stat-label" style="color:var(--ink-soft);">Plastic laminates</div></div>
+          <div><div class="stat-number" style="color:var(--forest);">15</div><div class="stat-label" style="color:var(--ink-soft);">Plastic laminates</div></div>
         </div>
         <button class="roll-btn dark" style="margin-top:28px;" onclick="window.location.href='404.html';">
           <span>Our sustainability practices</span>
