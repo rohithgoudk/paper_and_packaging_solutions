@@ -142,7 +142,15 @@
      Header
      ========================================================================== */
   .site-header{
-    position:fixed; top:0; left:0; right:0; z-index:100;
+    position:fixed; top:0; left:0; right:0;
+    /* z-index raised above .mobile-menu (300) so the hamburger button
+       (and the header bar it lives in) always stays on top and clickable,
+       even while the mobile menu sheet/backdrop is open. This was the
+       root cause of the hamburger "not responding" bug: the header used
+       to sit at z-index:100, BELOW the mobile menu's z-index:300, so once
+       the sheet opened it visually and functionally covered the toggle
+       button and swallowed the click meant to close it. */
+    z-index:310;
     background:rgba(246,241,231,0.92);
     backdrop-filter:blur(10px);
     -webkit-backdrop-filter:blur(10px);
@@ -193,26 +201,35 @@
   .nav-toggle{
     display:flex; align-items:center; justify-content:center;
     width:40px; height:40px; color:var(--ink);
+    position:relative; z-index:1;
   }
   .nav-toggle svg{ width:22px; height:22px; }
   @media (min-width:900px){ .nav-toggle{ display:none; } }
   
+  /* ==========================================================================
+     Mobile menu — solid white sheet, sits above everything, no overlap/bleed
+     ========================================================================== */
   .mobile-menu{
-    position:fixed; inset:0; z-index:200;
+    position:fixed; inset:0; z-index:300;
     pointer-events:none;
   }
   .mobile-menu-backdrop{
-    position:absolute; inset:0; background:rgba(28,23,18,0.5);
+    position:absolute; inset:0; background:rgba(28,23,18,0.55);
     opacity:0; transition:opacity 0.4s var(--ease);
   }
   .mobile-sheet{
     position:absolute; top:0; right:0; bottom:0;
     width:85%; max-width:340px;
-    background:var(--ink); color:var(--paper);
+    height:100vh; height:100dvh;
+    background-color:var(--paper);
+    color:var(--ink);
+    opacity:1;
+    box-shadow:-12px 0 40px rgba(28,23,18,0.25);
     transform:translateX(100%);
     transition:transform 0.5s var(--ease);
     display:flex; flex-direction:column; justify-content:space-between;
     padding:100px 32px 40px;
+    overflow-y:auto;
   }
   .mobile-menu.open{ pointer-events:auto; }
   .mobile-menu.open .mobile-menu-backdrop{ opacity:1; }
@@ -221,9 +238,11 @@
   .mobile-nav-links{ display:flex; flex-direction:column; gap:22px; }
   .mobile-nav-links a{
     font-family:var(--display); font-size:28px; letter-spacing:0.01em;
+    color:var(--ink);
     opacity:0; transform:translateX(24px);
-    transition:opacity 0.5s var(--ease), transform 0.5s var(--ease);
+    transition:opacity 0.5s var(--ease), transform 0.5s var(--ease), color 0.25s var(--ease);
   }
+  .mobile-nav-links a:hover, .mobile-nav-links a.active{ color:var(--stamp); }
   .mobile-menu.open .mobile-nav-links a:nth-child(1){ transition-delay:0.15s; }
   .mobile-menu.open .mobile-nav-links a:nth-child(2){ transition-delay:0.225s; }
   .mobile-menu.open .mobile-nav-links a:nth-child(3){ transition-delay:0.3s; }
@@ -233,10 +252,12 @@
   .mobile-menu.open .mobile-nav-links a{ opacity:1; transform:translateX(0); }
   .mobile-sheet .roll-btn{
     opacity:0; transform:translateY(14px);
-    transition:opacity 0.5s var(--ease) 0.45s, transform 0.5s var(--ease) 0.45s, background 0.3s var(--ease);
+    transition:opacity 0.5s var(--ease) 0.45s, transform 0.5s var(--ease) 0.45s, background 0.3s var(--ease), color 0.3s var(--ease);
     align-self:flex-start;
   }
   .mobile-menu.open .mobile-sheet .roll-btn{ opacity:1; transform:translateY(0); }
+  .mobile-sheet .roll-btn.ghost{ color:var(--ink); border-color:var(--line); }
+  .mobile-sheet .roll-btn.ghost:hover{ background:var(--ink); color:var(--paper); }
   
   /* hamburger animation */
   .hamburger{ position:relative; width:20px; height:14px; }
@@ -678,7 +699,7 @@
       </button>
     </div>
 
-    <button class="nav-toggle" id="menu-toggle" aria-label="Open menu">
+    <button class="nav-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
       <span class="hamburger"><span></span><span></span><span></span></span>
     </button>
   </div>
@@ -696,7 +717,7 @@
         <a href="contact.html">Contact</a>
       </div>
       <div class="mobile-sheet-actions">
-        <button class="roll-btn ghost" style="color:var(--paper); border-color:var(--line-light);" onclick="window.location.href='login.html';">
+        <button class="roll-btn ghost" onclick="window.location.href='login.html';">
           <span>Login</span>
         </button>
       </div>
@@ -1058,6 +1079,54 @@
   </div>
 </footer>
 
-<script src="./script.js"></script>
+<script>
+  // Mobile menu toggle
+  (function(){
+    var toggle = document.getElementById('menu-toggle');
+    var menu = document.getElementById('mobile-menu');
+    var backdrop = document.getElementById('menu-backdrop');
+    if(!toggle || !menu) return;
+
+    function closeMenu(){
+      menu.classList.remove('open');
+      toggle.classList.remove('active');
+      toggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+    function openMenu(){
+      menu.classList.add('open');
+      toggle.classList.add('active');
+      toggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+
+    toggle.addEventListener('click', function(e){
+      e.stopPropagation();
+      if(menu.classList.contains('open')){ closeMenu(); } else { openMenu(); }
+    });
+    if(backdrop) backdrop.addEventListener('click', closeMenu);
+    menu.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', closeMenu);
+    });
+    // Close on Escape for keyboard users
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && menu.classList.contains('open')){ closeMenu(); }
+    });
+    // Auto-close if window is resized up to desktop width while open
+    window.addEventListener('resize', function(){
+      if(window.innerWidth >= 900 && menu.classList.contains('open')){ closeMenu(); }
+    });
+  })();
+
+  // Header scroll shadow
+  (function(){
+    var header = document.getElementById('site-header');
+    if(!header) return;
+    window.addEventListener('scroll', function(){
+      if(window.scrollY > 10){ header.classList.add('scrolled'); }
+      else { header.classList.remove('scrolled'); }
+    });
+  })();
+</script>
 </body>
 </html>
