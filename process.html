@@ -518,6 +518,17 @@ a:focus-visible, button:focus-visible, .faq-question:focus-visible {
 
 .reveal{ opacity:0; transform:translateY(28px); transition:opacity 0.8s var(--ease), transform 0.8s var(--ease); }
 .reveal.in{ opacity:1; transform:translateY(0); }
+
+/* ==========================================================================
+   NEW — extra photo inserts added to previously image-less sections
+   ========================================================================== */
+.insert-photo { border-radius:16px; overflow:hidden; border:1px solid var(--line); background:var(--kraft-light); }
+.insert-photo img { width:100%; height:100%; object-fit:cover; display:block; }
+.insert-photo.ratio-wide { aspect-ratio:21/9; }
+.insert-photo.ratio-banner { aspect-ratio:16/6; }
+.insert-photo.ratio-1x1 { aspect-ratio:1/1; }
+.section-dark .insert-photo { border-color:var(--line-light); }
+@media (min-width:768px) { .insert-photo.ratio-wide { aspect-ratio:3/1; } }
 </style>
 </head>
 <body>
@@ -621,6 +632,12 @@ a:focus-visible, button:focus-visible, .faq-question:focus-visible {
   <div class="wrap px">
     <div class="badge-row"><span class="badge-pill on-dark">The four stages</span></div>
     <h2 class="section-heading" style="color:var(--paper);">One workflow, <em>zero handoffs.</em></h2>
+
+    <!-- NEW IMAGE 1 — four stages banner -->
+    <div class="insert-photo ratio-wide reveal" style="margin-top:32px;">
+      <img src="./Assets/p1.webp" alt="Industrial press machine used across our design, prototype, and production stages">
+    </div>
+
     <div class="process-row" style="margin-top:44px;">
       <div class="process-step">
         <span class="num">01 / Design</span>
@@ -699,6 +716,12 @@ a:focus-visible, button:focus-visible, .faq-question:focus-visible {
   <div class="wrap px">
     <div class="badge-row"><span class="badge-pill">Where it's made</span></div>
     <h2 class="section-heading tight">Six facilities, <em>one point of contact.</em></h2>
+
+    <!-- NEW IMAGE 2 — production facilities banner -->
+    <div class="insert-photo ratio-banner reveal" style="margin-top:32px;">
+      <img src="./Assets/p2.webp" alt="Production machine cutting a sheet of paper on the factory floor">
+    </div>
+
     <div class="industry-grid" style="margin-top:40px;">
       <div class="industry-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21h18"/><path d="M5 21V9l7-5 7 5v12"/></svg><span>Corrugating plant</span></div>
       <div class="industry-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h9l5 5v13H6z"/><path d="M15 3v5h5"/></svg><span>Flexo press</span></div>

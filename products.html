@@ -504,6 +504,17 @@ a:focus-visible, button:focus-visible, .faq-question:focus-visible {
 
 .reveal{ opacity:0; transform:translateY(28px); transition:opacity 0.8s var(--ease), transform 0.8s var(--ease); }
 .reveal.in{ opacity:1; transform:translateY(0); }
+
+/* ==========================================================================
+   NEW — extra photo inserts added to previously image-less sections
+   ========================================================================== */
+.insert-photo { border-radius:16px; overflow:hidden; border:1px solid var(--line); background:var(--kraft-light); }
+.insert-photo img { width:100%; height:100%; object-fit:cover; display:block; }
+.insert-photo.ratio-wide { aspect-ratio:21/9; }
+.insert-photo.ratio-banner { aspect-ratio:16/6; }
+.insert-photo.ratio-1x1 { aspect-ratio:1/1; }
+.section-dark .insert-photo { border-color:var(--line-light); }
+@media (min-width:768px) { .insert-photo.ratio-wide { aspect-ratio:3/1; } }
 </style>
 </head>
 <body>
@@ -601,6 +612,11 @@ a:focus-visible, button:focus-visible, .faq-question:focus-visible {
     <div class="badge-row"><span class="badge-pill">The catalog</span></div>
     <h2 class="section-heading">Every line, <em>built to your dimensions.</em></h2>
 
+    <!-- NEW IMAGE 1 — product catalog banner -->
+    <div class="insert-photo ratio-wide reveal" style="margin-top:32px;">
+      <img src="./Assets/pro1.webp" alt="Assortment of brown cardboard boxes representing the full product catalog">
+    </div>
+
     <div class="product-grid" style="margin-top:44px;">
       <div class="product-card reveal">
         <span class="product-num">01</span>
@@ -685,6 +701,12 @@ a:focus-visible, button:focus-visible, .faq-question:focus-visible {
   <div class="wrap px">
     <div class="badge-row"><span class="badge-pill">Material options</span></div>
     <h2 class="section-heading tight">Pick a board, <em>not a compromise.</em></h2>
+
+    <!-- NEW IMAGE 2 — material options banner -->
+    <div class="insert-photo ratio-banner reveal" style="margin-top:32px;">
+      <img src="./Assets/pro2.webp" alt="Close-up of beige recycled paperboard material used across our board options">
+    </div>
+
     <div class="option-grid" style="margin-top:40px;">
       <div class="product-card">
         <span class="product-num">A</span>
@@ -715,6 +737,12 @@ a:focus-visible, button:focus-visible, .faq-question:focus-visible {
   <div class="wrap px">
     <div class="badge-row"><span class="badge-pill on-dark">Who orders these lines</span></div>
     <h2 class="section-heading" style="color:var(--paper);">Made for the industries <em>that ship the most.</em></h2>
+
+    <!-- NEW IMAGE 3 — industries banner -->
+    <div class="insert-photo ratio-wide reveal" style="margin-top:32px;">
+      <img src="./Assets/pro3.webp" alt="Brown cardboard boxes stacked on a warehouse rack, ready for industries we ship to">
+    </div>
+
     <div class="industry-grid" style="margin-top:40px;">
       <div class="industry-card" style="border-color:var(--line-light); color:var(--paper);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 9l9-6 9 6-9 6-9-6z"/><path d="M3 9v6l9 6 9-6V9"/></svg><span>E-commerce</span></div>
       <div class="industry-card" style="border-color:var(--line-light); color:var(--paper);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 3h16v18H4z"/><path d="M9 21V12h6v9"/></svg><span>Food &amp; beverage</span></div>
