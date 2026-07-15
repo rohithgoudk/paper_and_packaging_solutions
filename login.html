@@ -276,6 +276,31 @@ body::after{
 }
 .field-input-wrap input::placeholder{ color:var(--ink-45); }
 
+/* Kill native browser password reveal/clear icons (Edge, IE) —
+   these were overlapping our custom eye toggle and showing as a
+   second icon once text was typed into the password field. */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear{
+  display:none;
+  width:0; height:0;
+  pointer-events:none;
+}
+/* Chrome/Safari on some platforms (esp. autofill-managed fields) */
+input[type="password"]::-webkit-credentials-auto-fill-button,
+input[type="password"]::-webkit-strong-password-auto-fill-button{
+  display:none !important;
+  visibility:hidden;
+  pointer-events:none;
+  position:absolute;
+  right:0;
+}
+
+/* --- Password show/hide toggle (fixed) ---
+   Only ONE icon (eye or eye-off) is visible at a time.
+   JS sets inline display styles directly so there is no reliance
+   on CSS specificity between ".field-toggle svg" and
+   ".field-toggle .eye-off", which was the cause of both icons
+   rendering together. */
 .field-toggle{
   display:flex; align-items:center; justify-content:center;
   width:40px; height:40px; flex-shrink:0; margin-right:4px;
@@ -285,9 +310,6 @@ body::after{
 }
 .field-toggle:hover{ color:var(--stamp); }
 .field-toggle svg{ width:18px; height:18px; }
-.field-toggle .eye-off{ display:none; }
-.field-toggle.showing .eye{ display:none; }
-.field-toggle.showing .eye-off{ display:block; }
 
 .field-row{
   display:flex; align-items:center; justify-content:space-between;
@@ -452,8 +474,8 @@ body::after{
             <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
             <input type="password" id="password" name="password" placeholder="Enter your password" autocomplete="current-password" required>
             <button type="button" class="field-toggle" id="pw-toggle" aria-label="Show password">
-              <svg class="eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
-              <svg class="eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.94 10.94 0 0112 19c-7 0-11-7-11-7a21.6 21.6 0 015.06-6.06M9.9 4.24A10.94 10.94 0 0112 4c7 0 11 7 11 7a21.6 21.6 0 01-2.66 3.79"/><path d="M14.12 14.12a3 3 0 11-4.24-4.24"/><path d="M1 1l22 22"/></svg>
+              <svg class="eye" style="display:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+              <svg class="eye-off" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.94 10.94 0 0112 19c-7 0-11-7-11-7a21.6 21.6 0 015.06-6.06M9.9 4.24A10.94 10.94 0 0112 4c7 0 11 7 11 7a21.6 21.6 0 01-2.66 3.79"/><path d="M14.12 14.12a3 3 0 11-4.24-4.24"/><path d="M1 1l22 22"/></svg>
             </button>
           </div>
         </div>
@@ -475,7 +497,7 @@ body::after{
         </button>
       </form>
 
-      <div class="auth-divider"><span>New to Pulp &amp; Press</span></div>
+      <div class="auth-divider"><span>New to Paper &amp; Press</span></div>
 
       <p class="auth-footer-text">Don't have an account yet? <a href="signup.html">Create an account</a></p>
 
@@ -499,12 +521,22 @@ body::after{
     });
   });
 
+  // --- Password show/hide toggle (fixed) ---
+  // Previously both the "eye" and "eye-off" icons could render at once.
+  // Now the JS explicitly sets which single icon is visible via inline
+  // style, so there is never a moment where both icons are shown together.
   const pwToggle = document.getElementById('pw-toggle');
   const pwInput = document.getElementById('password');
+  const eyeIcon = pwToggle.querySelector('.eye');
+  const eyeOffIcon = pwToggle.querySelector('.eye-off');
+
   pwToggle.addEventListener('click', () => {
-    const showing = pwToggle.classList.toggle('showing');
+    const showing = !pwToggle.classList.contains('showing');
+    pwToggle.classList.toggle('showing', showing);
     pwInput.type = showing ? 'text' : 'password';
     pwToggle.setAttribute('aria-label', showing ? 'Hide password' : 'Show password');
+    eyeIcon.style.display = showing ? 'none' : 'block';
+    eyeOffIcon.style.display = showing ? 'block' : 'none';
   });
 
   const form = document.getElementById('login-form');

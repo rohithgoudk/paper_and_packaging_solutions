@@ -665,6 +665,17 @@
     .option-grid { display:grid; grid-template-columns:1fr; gap:20px; }
     @media (min-width:640px) { .option-grid { grid-template-columns:repeat(2,1fr); } }
     @media (min-width:1024px) { .option-grid { grid-template-columns:repeat(4,1fr); } }
+
+    /* ==========================================================================
+       NEW — extra photo inserts added to previously image-less sections
+       ========================================================================== */
+    .insert-photo { border-radius:16px; overflow:hidden; border:1px solid var(--line); background:var(--kraft-light); }
+    .insert-photo img { width:100%; height:100%; object-fit:cover; display:block; }
+    .insert-photo.ratio-wide { aspect-ratio:21/9; }
+    .insert-photo.ratio-banner { aspect-ratio:16/6; }
+    .insert-photo.ratio-1x1 { aspect-ratio:1/1; }
+    .section-dark .insert-photo { border-color:var(--line-light); }
+    @media (min-width:768px) { .insert-photo.ratio-wide { aspect-ratio:3/1; } }
   </style>
 </head>
 <body>
@@ -796,6 +807,11 @@
     <div class="badge-row"><span class="badge-pill">What we make</span></div>
     <h2 class="section-heading">Six product lines, <em>one production run away.</em></h2>
 
+    <!-- NEW IMAGE 1 — products preview banner -->
+    <div class="insert-photo ratio-wide reveal" style="margin-top:32px;">
+      <img src="./Assets/edit1.webp" alt="Stacked corrugated shipping boxes ready for dispatch">
+    </div>
+
     <div class="product-grid" style="margin-top:44px;">
       <div class="product-card reveal">
         <span class="product-num">01</span>
@@ -829,6 +845,11 @@
   <div class="wrap px">
     <div class="badge-row"><span class="badge-pill on-dark">How a project moves</span></div>
     <h2 class="section-heading" style="color:var(--paper);">Four stages. <em>Same team the whole way.</em></h2>
+
+    <!-- NEW IMAGE 2 — process preview banner -->
+    <div class="insert-photo ratio-wide reveal" style="margin-top:32px;">
+      <img src="./Assets/edit2.webp" alt="Close-up of corrugated cardboard texture on the production line">
+    </div>
 
     <div class="process-row" style="margin-top:44px;">
       <div class="process-step">
@@ -869,6 +890,11 @@
     <div class="badge-row"><span class="badge-pill">Who we pack for</span></div>
     <h2 class="section-heading tight">Built for the industries <em>that ship the most.</em></h2>
 
+    <!-- NEW IMAGE 3 — industries banner -->
+    <div class="insert-photo ratio-banner reveal" style="margin-top:32px;">
+      <img src="./Assets/edit3.webp" alt="Finished cardboard box ready for shipment across industries">
+    </div>
+
     <div class="industry-grid" style="margin-top:40px;">
       <div class="industry-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 9l9-6 9 6-9 6-9-6z"/><path d="M3 9v6l9 6 9-6V9"/></svg><span>E-commerce</span></div>
       <div class="industry-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 3h16v18H4z"/><path d="M9 21V12h6v9"/></svg><span>Food &amp; beverage</span></div>
@@ -902,10 +928,16 @@
           <span>Our sustainability practices</span>
         </button>
       </div>
-      <div class="stamp-cluster reveal">
-        <div class="stamp">FSC<br>Certified</div>
-        <div class="stamp">Curbside<br>Recyclable</div>
-        <div class="stamp">Soy-Based<br>Inks</div>
+      <div class="reveal" style="display:flex; flex-direction:column; gap:20px;">
+        <!-- NEW IMAGE 4 — sustainability fibre close-up -->
+        <div class="insert-photo ratio-1x1">
+          <img src="./Assets/edit4.webp" alt="Close-up of recycled kraft paper fibre used in sustainable packaging">
+        </div>
+        <div class="stamp-cluster">
+          <div class="stamp">FSC<br>Certified</div>
+          <div class="stamp">Curbside<br>Recyclable</div>
+          <div class="stamp">Soy-Based<br>Inks</div>
+        </div>
       </div>
     </div>
   </div>
@@ -950,6 +982,11 @@
   <div class="wrap px">
     <div class="badge-row"><span class="badge-pill gray-300">Getting started</span></div>
     <h2 class="section-heading tight">Start with a sample, <em>scale when it fits.</em></h2>
+
+    <!-- NEW IMAGE 5 — pricing / sample kit banner -->
+    <div class="insert-photo ratio-wide reveal" style="margin-top:32px;">
+      <img src="./Assets/edit5.webp" alt="Closed white cardboard sample box ready to ship">
+    </div>
 
     <div class="pricing-grid" style="margin-top:40px;">
       <div class="price-card">
@@ -1038,8 +1075,8 @@
         <h4>Reach Us</h4>
         <div class="footer-address">
           Nagole, Hyderabad<br>
-          <a href="mailto:Stackly@paperandpress.com">Stackly@paperandpress.com</a><br>
-          <a href="tel:+919879876751">+91 9879876751</a>
+          <a href="404.html">Stackly@paperandpress.com</a><br>
+         <a href="404.html">+91 9879876751</a>
         </div>
         <div class="footer-social">
           <a href="404.html" aria-label="Instagram">
