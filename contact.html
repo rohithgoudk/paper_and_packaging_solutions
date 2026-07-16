@@ -605,6 +605,26 @@ a:focus-visible, button:focus-visible, .faq-question:focus-visible {
 .option-grid{ display:grid; grid-template-columns:1fr; gap:20px; }
 @media (min-width:640px){ .option-grid{ grid-template-columns:repeat(2,1fr); } }
 @media (min-width:1024px){ .option-grid{ grid-template-columns:repeat(4,1fr); } }
+
+/* ==========================================================================
+   Map
+   ========================================================================== */
+.map-frame{
+  position:relative;
+  width:100%;
+  aspect-ratio:16/7;
+  border-radius:20px;
+  overflow:hidden;
+  border:1px solid var(--line);
+  background:var(--paper-dim);
+}
+@media (max-width:640px){ .map-frame{ aspect-ratio:4/5; border-radius:16px; } }
+.map-frame iframe{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  border:0;
+  filter:grayscale(0.15) contrast(1.02);
+}
 </style>
 </head>
 <body>
@@ -715,7 +735,7 @@ a:focus-visible, button:focus-visible, .faq-question:focus-visible {
           </div>
           <div class="contact-info-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <div><h4>Location</h4><p>Nagole, Hyderabad</p></div>
+            <div><h4>Location</h4><p>MMR Complex, Periyakollappatty, Chinna Thirupathi, Salem, Tamil Nadu 636008</p></div>
           </div>
           <div class="contact-info-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
@@ -758,6 +778,17 @@ a:focus-visible, button:focus-visible, .faq-question:focus-visible {
         </div>
         <button class="btn-flat" type="submit" style="max-width:220px;">Send message</button>
       </form>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 2B. MAP ======================= -->
+<section class="section-cream flute-bg" id="contact-map">
+  <div class="wrap px">
+    <div class="badge-row"><span class="badge-pill">Find us</span></div>
+    <h2 class="section-heading tight">Come by <em>the facility.</em></h2>
+    <div class="map-frame reveal" style="margin-top:36px;">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3907.1616097152896!2d78.1739798!3d11.682956599999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3babefef7fd970bb%3A0xe11aef1a71994f9!2sStackly!5e0!3m2!1sen!2sin!4v1784180202163!5m2!1sen!2sin" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Paper & Press location map"></iframe>
     </div>
   </div>
 </section>
@@ -939,7 +970,7 @@ a:focus-visible, button:focus-visible, .faq-question:focus-visible {
       <div class="footer-col footer-contact">
         <h4>Reach Us</h4>
         <div class="footer-address">
-          Nagole, Hyderabad<br>
+          MMR Complex, Periyakollappatty, Chinna Thirupathi, Salem, Tamil Nadu 636008<br>
           <a href="404.html">Stackly@paperandpress.com</a><br>
           <a href="404.html">+91 9879876751</a>
         </div>
